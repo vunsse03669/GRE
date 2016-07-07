@@ -6,7 +6,7 @@
 target 'GRE' do
 pod 'RxSwift'
 pod 'RxCocoa'
-pod 'Realm'
+pod 'RealmSwift'
 pod 'SwiftyJSON'
 end
 
