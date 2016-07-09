@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3GB-nW-2JY">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--List Pack View Controller-->
@@ -21,21 +22,58 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="279" y="482"/>
+            <point key="canvasLocation" x="187" y="510"/>
         </scene>
-        <!--View Controller-->
+        <!--Flash Card View Controller-->
         <scene sceneID="e08-v6-g8m">
             <objects>
-                <viewController id="3GB-nW-2JY" sceneMemberID="viewController">
+                <viewController id="3GB-nW-2JY" customClass="FlashCardViewController" customModule="GRE" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HQ3-Ul-8Mh"/>
                         <viewControllerLayoutGuide type="bottom" id="eKd-zS-e28"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Baw-Nr-oCF">
+                    <view key="view" contentMode="scaleToFill" id="Baw-Nr-oCF" customClass="Flash">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03b-ox-54x">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="vuP-bx-akn"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxd-ic-eHr">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgO-Hb-CEY">
+                                        <rect key="frame" x="30" y="30" width="540" height="334"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="mgO-Hb-CEY" firstAttribute="centerX" secondItem="cxd-ic-eHr" secondAttribute="centerX" id="9cr-Ov-hfp"/>
+                                    <constraint firstItem="mgO-Hb-CEY" firstAttribute="top" secondItem="cxd-ic-eHr" secondAttribute="top" constant="30" id="HSA-hh-gil"/>
+                                    <constraint firstItem="mgO-Hb-CEY" firstAttribute="width" secondItem="cxd-ic-eHr" secondAttribute="width" multiplier="0.9" id="L8g-JG-zyR"/>
+                                    <constraint firstItem="mgO-Hb-CEY" firstAttribute="height" secondItem="cxd-ic-eHr" secondAttribute="height" multiplier="0.6" id="xzD-RO-FUs"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="03b-ox-54x" firstAttribute="leading" secondItem="Baw-Nr-oCF" secondAttribute="leading" id="CyC-Gp-3Dn"/>
+                            <constraint firstAttribute="trailing" secondItem="cxd-ic-eHr" secondAttribute="trailing" id="Q4z-D4-eJe"/>
+                            <constraint firstAttribute="trailing" secondItem="03b-ox-54x" secondAttribute="trailing" id="bdm-t6-igk"/>
+                            <constraint firstItem="03b-ox-54x" firstAttribute="top" secondItem="Baw-Nr-oCF" secondAttribute="top" id="dzp-EY-zmj"/>
+                            <constraint firstItem="cxd-ic-eHr" firstAttribute="top" secondItem="03b-ox-54x" secondAttribute="bottom" id="fOV-BQ-cuf"/>
+                            <constraint firstItem="eKd-zS-e28" firstAttribute="top" secondItem="cxd-ic-eHr" secondAttribute="bottom" id="hTx-om-xri"/>
+                            <constraint firstItem="cxd-ic-eHr" firstAttribute="leading" secondItem="Baw-Nr-oCF" secondAttribute="leading" id="r46-JR-jKw"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="vFlashCard" destination="mgO-Hb-CEY" id="GzK-6F-Cis"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cpC-ey-JCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
