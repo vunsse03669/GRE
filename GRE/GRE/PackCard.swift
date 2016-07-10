@@ -15,9 +15,9 @@ class PackCard:Object{
     dynamic var numberMasterCard  : Int    = 0
     dynamic var numberReviewCard  : Int    = 0
     dynamic var numberLearningCard: Int    = 0
-    dynamic var cards             : [Card] = []
+    var cards : List<Card> = List<Card>()
     
-    static func create(name: String, cards : [Card]) -> PackCard {
+    static func create(name: String, cards : List<Card>) -> PackCard {
         let newPack = PackCard()
         newPack.name = name
         newPack.cards = cards

@@ -6,11 +6,12 @@
 //  Copyright © 2016 Mr.Vu. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 
 class DB: Object{
-    static let realm = try!Realm()
+    
+    static let realm = try! Realm()
+
     //MARK: PACKCARD
     static func createPack(pack : PackCard){
         try! realm.write{
@@ -23,5 +24,10 @@ class DB: Object{
         try! realm.write{
             realm.add(card)
         }
+    }
+    
+    static func getCardByWord(word : String) -> Card! {
+        let predicate = NSPredicate(format: "word = %@", word)
+        return realm.objects(Card).filter(predicate).first
     }
 }

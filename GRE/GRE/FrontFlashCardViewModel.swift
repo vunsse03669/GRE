@@ -12,9 +12,19 @@ class FrontFlashCardViewModel: UIView {
     
     @IBOutlet weak var lblWord: UILabel!
     @IBOutlet weak var lblTag: UILabel!
+    var card : Card! {
+        didSet{
+            self.layout()
+        }
+    }
     
     override func awakeFromNib() {
-        
+
+    }
+    
+    func layout() {
+        self.lblWord.text = card.word
+        self.lblTag.text = card.tag
     }
     
     required init?(coder aDecoder: NSCoder) {

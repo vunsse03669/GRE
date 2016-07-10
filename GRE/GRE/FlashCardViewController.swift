@@ -9,16 +9,23 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
 class FlashCardViewController: UIViewController {
+    
     @IBOutlet weak var vFlashCard: UIView!
+    
     var frontFlashCard : FrontFlashCardViewModel!
     var backFlashCard  : BackFlashCardViewModel!
     var isFlip = false
+    var currentCard = 0
+    var cardCollection = [Card]()
+    var nextCardVariable = Variable("")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configLayout()
+        self.configLayout()
+        self.dumpData()
         
         vFlashCard.userInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer.init()
@@ -26,31 +33,85 @@ class FlashCardViewController: UIViewController {
             gestureReconizer in
             self.flipFlashCard()
         }
-        vFlashCard.addGestureRecognizer(tapGesture)
+        self.vFlashCard.addGestureRecognizer(tapGesture)
+        
+    
     }
     
     func flipFlashCard() {
-        if !isFlip {
+        if !self.isFlip {
             UIView.transitionFromView(frontFlashCard, toView: backFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
-            isFlip = true
+            self.isFlip = true
         }
         else {
             UIView.transitionFromView(backFlashCard, toView: frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
-            isFlip = false
+            self.isFlip = false
         }
     }
     
-    //MARK: config UI
+    //MARK: Config UI
     func configLayout() {
-        vFlashCard.layoutIfNeeded()
-        let frameFrontCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width, 2*vFlashCard.layer.frame.size.height/3)
-        let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width, vFlashCard.layer.frame.size.height)
+        self.vFlashCard.layoutIfNeeded()
+        let frameFrontCard = CGRectMake(0, 0, self.vFlashCard.layer.frame.size.width,
+                                        2*self.vFlashCard.layer.frame.size.height/3)
+        let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width,
+                                       self.vFlashCard.layer.frame.size.height)
+        
         // Load FrontFlashCardView
-        frontFlashCard = NSBundle.mainBundle().loadNibNamed("FrontFlashCardView", owner: self, options: nil) [0] as! FrontFlashCardViewModel
-        frontFlashCard.frame = frameFrontCard
-        vFlashCard.addSubview(frontFlashCard)
+        self.frontFlashCard = NSBundle.mainBundle().loadNibNamed("FrontFlashCardView", owner: self, options: nil) [0] as! FrontFlashCardViewModel
+        self.frontFlashCard.frame = frameFrontCard
+        self.vFlashCard.addSubview(self.frontFlashCard)
+        
         // Load BackFlashCardView
-        backFlashCard = NSBundle.mainBundle().loadNibNamed("BackFlashCardView", owner: self, options: nil) [0] as! BackFlashCardViewModel
-        backFlashCard.frame = frameBackCard
+        self.backFlashCard = NSBundle.mainBundle().loadNibNamed("BackFlashCardView", owner: self, options: nil) [0] as! BackFlashCardViewModel
+        self.backFlashCard.frame = frameBackCard
+        
+        self.backFlashCard.nextCardFlag = self.nextCardVariable
+    }
+    
+    //MARK: Dump data
+    func dumpData() {
+        if let file = NSBundle(forClass:AppDelegate.self).pathForResource("text", ofType: "txt") {
+            let data = NSData(contentsOfFile: file)!
+            let json = JSON(data:data)
+            
+            for index in 0..<json[0]["card"].count {
+                let jsonCard = json[0]["card"][index]
+                let word     = jsonCard["word"].string!
+                let type     = jsonCard["type"].string!
+                let script   = jsonCard["script"].string!
+                let tag      = jsonCard["tag"].string!
+                print(word)
+                
+                if DB.getCardByWord(word) == nil {
+                    let card = Card.create(word, type: type, script: script, tag: tag)
+                    self.cardCollection.append(card)
+                }
+                else {
+                    self.cardCollection.append(DB.getCardByWord(word))
+                }
+            }
+            self.bindingData()
+        } else {
+            print("file not exists")
+        }
+    }
+    
+    func bindingData() {
+        
+        _ = self.nextCardVariable.asObservable().subscribeNext {
+            next in
+            if next != "" {
+                self.currentCard += 1
+                if self.currentCard == self.cardCollection.count {
+                    self.currentCard = 0
+                }
+                UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+                self.isFlip = false
+
+            }
+            self.frontFlashCard.card = self.cardCollection[self.currentCard]
+            self.backFlashCard.card = self.cardCollection[self.currentCard]
+        }
     }
 }
