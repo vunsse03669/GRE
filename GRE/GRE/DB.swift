@@ -30,4 +30,10 @@ class DB: Object{
         let predicate = NSPredicate(format: "word = %@", word)
         return realm.objects(Card).filter(predicate).first
     }
+    
+    static func updateTag(card : Card, tag : String) {
+        try! realm.write {
+            card.tag = tag
+        }
+    }
 }

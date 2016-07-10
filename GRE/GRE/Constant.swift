@@ -6,7 +6,7 @@
 //  Copyright © 2016 Mr.Vu. All rights reserved.
 //
 
-let NEW_WORD_TAG = "NEW WORD"
-let LEARNING_TAG = "LEARNING"
-let REVIEW_TAG = "REVIEW"
-let MASTER_TAG = "MASTER"
+let NEW_WORD_TAG = "new word"
+let LEARNING_TAG = "learning"
+let REVIEW_TAG = "review"
+let MASTER_TAG = "master"

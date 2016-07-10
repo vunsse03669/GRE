@@ -31,10 +31,10 @@ class BackFlashCardViewModel: UIView {
     override func awakeFromNib() {
         
         _ = btnKnew.rx_tap.subscribeNext {
-            self.nextCardFlag.value = "next"
+            self.nextCardFlag.value = "knew"
         }
         _ = btnNotKnew.rx_tap.subscribeNext {
-            self.nextCardFlag.value = "next"
+            self.nextCardFlag.value = "notKnew"
         }
         
     }
@@ -51,7 +51,7 @@ class BackFlashCardViewModel: UIView {
         self.lblScript.sizeToFit()
         self.lblType.sizeToFit()
         self.height = self.lblWord.frame.size.height + self.lblType.frame.size.height
-            + self.lblScript.frame.size.height + 60 + 88
+            + self.lblScript.frame.size.height + 80 + 88
         print(self.height)
     }
 

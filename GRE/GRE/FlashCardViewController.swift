@@ -13,14 +13,24 @@ import SwiftyJSON
 
 class FlashCardViewController: UIViewController {
     
+
     @IBOutlet weak var vFlashCard: UIView!
+    @IBOutlet weak var lblTotal: UILabel!
+    @IBOutlet weak var lblReview: UILabel!
+    @IBOutlet weak var lblMaster: UILabel!
+    @IBOutlet weak var lblLearning: UILabel!
     
     var frontFlashCard : FrontFlashCardViewModel!
     var backFlashCard  : BackFlashCardViewModel!
     var isFlip = false
     var currentCard = 0
     var cardCollection = [Card]()
-    var nextCardVariable = Variable("")
+    
+    var nextCardVariable  = Variable("")
+    var numberOfLearning  : Variable<Int> = Variable(0)
+    var numberOfReviewing : Variable<Int> = Variable(0)
+    var numberOfMaster    : Variable<Int> = Variable(0)
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +75,24 @@ class FlashCardViewController: UIViewController {
         self.backFlashCard = NSBundle.mainBundle().loadNibNamed("BackFlashCardView", owner: self, options: nil) [0] as! BackFlashCardViewModel
        
         self.backFlashCard.nextCardFlag = self.nextCardVariable
+        
+        // Label progress
+        
+        _ = numberOfMaster.asObservable().subscribeNext {
+            master in
+            self.lblMaster.text = "Master : \(master)"
+        }
+        
+        _ = numberOfReviewing.asObservable().subscribeNext {
+            review in
+           self.lblReview.text = "Review : \(review)"
+        }
+        
+        _ = numberOfLearning.asObservable().subscribeNext {
+            learning in
+            self.lblLearning.text = "Learning : \(learning)"
+        }
+       
     }
     
     //MARK: Dump data
@@ -99,6 +127,7 @@ class FlashCardViewController: UIViewController {
         
         _ = self.nextCardVariable.asObservable().subscribeNext {
             next in
+            let card = self.cardCollection[self.currentCard]
             if next != "" {
                 self.currentCard += 1
                 if self.currentCard == self.cardCollection.count {
@@ -106,10 +135,45 @@ class FlashCardViewController: UIViewController {
                 }
                 UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
                 self.isFlip = false
-
+                
+                
+                // Progress learning
+                if next == "notKnew" {
+                    if card.tag == MASTER_TAG {
+                        DB.updateTag(card, tag: LEARNING_TAG)
+                        self.numberOfMaster.value -= 1
+                        self.numberOfLearning.value += 1
+                    }
+                    else if card.tag == REVIEW_TAG {
+                        DB.updateTag(card, tag: LEARNING_TAG)
+                        self.numberOfReviewing.value -= 1
+                        self.numberOfLearning.value += 1
+                    }
+                    else if card.tag == NEW_WORD_TAG {
+                        DB.updateTag(card, tag: LEARNING_TAG)
+                        self.numberOfLearning.value += 1
+                    }
+                }
+                else if next == "knew" {
+                    if card.tag == NEW_WORD_TAG {
+                        DB.updateTag(card, tag: MASTER_TAG)
+                        self.numberOfMaster.value += 1
+                    }
+                    else if card.tag == REVIEW_TAG {
+                        DB.updateTag(card, tag: MASTER_TAG)
+                        self.numberOfMaster.value += 1
+                        self.numberOfReviewing.value -= 1
+                    }
+                    else if card.tag == LEARNING_TAG {
+                        DB.updateTag(card, tag: REVIEW_TAG)
+                        self.numberOfReviewing.value += 1
+                        self.numberOfLearning.value  -= 1
+                    }
+                }
             }
-            self.frontFlashCard.card = self.cardCollection[self.currentCard]
-            self.backFlashCard.card = self.cardCollection[self.currentCard]
+            
+            self.frontFlashCard.card = card
+            self.backFlashCard.card = card
         }
     }
 }
