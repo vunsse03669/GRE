@@ -34,11 +34,12 @@ class FlashCardViewController: UIViewController {
             self.flipFlashCard()
         }
         self.vFlashCard.addGestureRecognizer(tapGesture)
-        
-    
     }
     
     func flipFlashCard() {
+        let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width,
+                                       self.backFlashCard.height)
+        self.backFlashCard.frame = frameBackCard
         if !self.isFlip {
             UIView.transitionFromView(frontFlashCard, toView: backFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
             self.isFlip = true
@@ -52,20 +53,17 @@ class FlashCardViewController: UIViewController {
     //MARK: Config UI
     func configLayout() {
         self.vFlashCard.layoutIfNeeded()
-        let frameFrontCard = CGRectMake(0, 0, self.vFlashCard.layer.frame.size.width,
-                                        2*self.vFlashCard.layer.frame.size.height/3)
-        let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width,
-                                       self.vFlashCard.layer.frame.size.height)
         
         // Load FrontFlashCardView
         self.frontFlashCard = NSBundle.mainBundle().loadNibNamed("FrontFlashCardView", owner: self, options: nil) [0] as! FrontFlashCardViewModel
+        let frameFrontCard = CGRectMake(0, 0, self.vFlashCard.layer.frame.size.width,
+                                        2*self.vFlashCard.layer.frame.size.height/3)
         self.frontFlashCard.frame = frameFrontCard
         self.vFlashCard.addSubview(self.frontFlashCard)
         
         // Load BackFlashCardView
         self.backFlashCard = NSBundle.mainBundle().loadNibNamed("BackFlashCardView", owner: self, options: nil) [0] as! BackFlashCardViewModel
-        self.backFlashCard.frame = frameBackCard
-        
+       
         self.backFlashCard.nextCardFlag = self.nextCardVariable
     }
     

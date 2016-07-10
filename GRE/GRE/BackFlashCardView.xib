@@ -79,13 +79,13 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J58-aN-GSs">
-                            <rect key="frame" x="8" y="153" width="407" height="185"/>
+                            <rect key="frame" x="8" y="74" width="407" height="14"/>
                             <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRz-1G-QBP">
-                            <rect key="frame" x="8" y="52" width="407" height="93"/>
+                            <rect key="frame" x="8" y="52" width="407" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -94,7 +94,6 @@
                     <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="xOo-ak-oCY" firstAttribute="leading" secondItem="zAL-MU-xrP" secondAttribute="leading" constant="8" id="4Wd-0i-KfR"/>
-                        <constraint firstItem="J58-aN-GSs" firstAttribute="height" secondItem="zAL-MU-xrP" secondAttribute="height" multiplier="0.5" id="6xG-D5-GSn"/>
                         <constraint firstItem="CRz-1G-QBP" firstAttribute="leading" secondItem="zAL-MU-xrP" secondAttribute="leading" constant="8" id="Bm1-7d-wcK"/>
                         <constraint firstAttribute="trailing" secondItem="J58-aN-GSs" secondAttribute="trailing" constant="8" id="L0X-lZ-ijj"/>
                         <constraint firstItem="J58-aN-GSs" firstAttribute="leading" secondItem="zAL-MU-xrP" secondAttribute="leading" constant="8" id="PPx-gZ-p08"/>
@@ -103,7 +102,6 @@
                         <constraint firstItem="CRz-1G-QBP" firstAttribute="top" secondItem="xOo-ak-oCY" secondAttribute="bottom" constant="24" id="WPP-tc-1dz"/>
                         <constraint firstAttribute="trailing" secondItem="KIw-Mm-XdG" secondAttribute="trailing" constant="8" id="ZDN-Za-Nbv"/>
                         <constraint firstItem="J58-aN-GSs" firstAttribute="top" secondItem="CRz-1G-QBP" secondAttribute="bottom" constant="8" id="eqo-UT-A0s"/>
-                        <constraint firstItem="CRz-1G-QBP" firstAttribute="height" secondItem="zAL-MU-xrP" secondAttribute="height" multiplier="0.25" id="rLF-rd-gca"/>
                         <constraint firstItem="xOo-ak-oCY" firstAttribute="top" secondItem="zAL-MU-xrP" secondAttribute="top" constant="8" id="rtu-ye-Zfb"/>
                         <constraint firstAttribute="trailing" secondItem="CRz-1G-QBP" secondAttribute="trailing" constant="8" id="vKe-B6-oWb"/>
                     </constraints>
@@ -127,6 +125,7 @@
                 <outlet property="lblTag" destination="CTF-cl-Pjp" id="lsy-Q1-iZU"/>
                 <outlet property="lblType" destination="CRz-1G-QBP" id="rqY-eD-Ys4"/>
                 <outlet property="lblWord" destination="xOo-ak-oCY" id="QOS-cb-HOn"/>
+                <outlet property="vContent" destination="zAL-MU-xrP" id="j2a-hD-Usv"/>
             </connections>
             <point key="canvasLocation" x="382.5" y="138.5"/>
         </view>

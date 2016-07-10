@@ -29,6 +29,11 @@
 "type": "adjective : to be native and innocent",
 "script": "Two-years in Manhattan had changed Jenna from an ingenuous girl from the suburbs to a jaded urbanite, unlikely to fakk for any rusem regardkess of how elaborate",
 "tag": "learning"
+}, {
+"word": "xxxxxx",
+"type": "adjective : to be native and innocent",
+"script": "Two-years in Manhattan had changed Jenna from an ingenuous girl from the suburbs to a jaded urbanite, unlikely to fakk for any rusem regardkess of how elaborate Two-years in Manhattan had changed Jenna from an ingenuous girl from the suburbs to a jaded urbanite, unlikely to fakk for any rusem regardkess of how elaborate Two-years in Manhattan had changed Jenna from an ingenuous girl from the suburbs to a jaded urbanite, unlikely to fakk for any rusem regardkess of how elaborate",
+"tag": "learning"
 }
 
 ]
