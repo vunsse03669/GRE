@@ -103,6 +103,10 @@ class FlashCardViewController: UIViewController {
                     width: self.vLearning.frame.width, height: self.vLearning.frame.height)
 
             }
+            else {
+                let frame = CGRectMake(0, 0, 0, 0)
+                self.vMaster.frame = frame
+            }
         }
         
         _ = numberOfReviewing.asObservable().subscribeNext {
@@ -114,6 +118,10 @@ class FlashCardViewController: UIViewController {
                 self.updateProgressPhase(self.vLearning, origiX: self.vMaster.frame.width +
                     self.vReview.frame.width,
                     width: self.vLearning.frame.width, height: self.vLearning.frame.height)
+            }
+            else {
+                let frame = CGRectMake(0, 0, 0, 0)
+                self.vReview.frame = frame
             }
         }
         
