@@ -36,4 +36,5 @@ class DB: Object{
             card.tag = tag
         }
     }
+    
 }

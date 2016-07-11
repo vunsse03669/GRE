@@ -127,15 +127,12 @@ class FlashCardViewController: UIViewController {
         
         _ = self.nextCardVariable.asObservable().subscribeNext {
             next in
-            let card = self.cardCollection[self.currentCard]
+            
             if next != "" {
-                self.currentCard += 1
-                if self.currentCard == self.cardCollection.count {
-                    self.currentCard = 0
-                }
+                
                 UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
                 self.isFlip = false
-                
+                let card = self.cardCollection[self.currentCard]
                 
                 // Progress learning
                 if next == "notKnew" {
@@ -170,10 +167,16 @@ class FlashCardViewController: UIViewController {
                         self.numberOfLearning.value  -= 1
                     }
                 }
+                self.currentCard += 1
+                if self.currentCard == self.cardCollection.count {
+                    self.currentCard = 0
+                }
             }
             
-            self.frontFlashCard.card = card
-            self.backFlashCard.card = card
+            self.frontFlashCard.card = self.cardCollection[self.currentCard]
+            self.backFlashCard.card  = self.cardCollection[self.currentCard]
+            
+            
         }
     }
 }
