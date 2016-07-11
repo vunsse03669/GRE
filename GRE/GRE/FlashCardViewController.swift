@@ -19,6 +19,11 @@ class FlashCardViewController: UIViewController {
     @IBOutlet weak var lblReview: UILabel!
     @IBOutlet weak var lblMaster: UILabel!
     @IBOutlet weak var lblLearning: UILabel!
+    @IBOutlet weak var vProgress: UIView!
+    
+    var vMaster   : UIView!
+    var vReview   : UIView!
+    var vLearning : UIView!
     
     var frontFlashCard : FrontFlashCardViewModel!
     var backFlashCard  : BackFlashCardViewModel!
@@ -77,22 +82,63 @@ class FlashCardViewController: UIViewController {
         self.backFlashCard.nextCardFlag = self.nextCardVariable
         
         // Label progress
+        self.vReview = UIView()
+        self.vMaster = UIView()
+        self.vLearning  = UIView()
         
         _ = numberOfMaster.asObservable().subscribeNext {
             master in
             self.lblMaster.text = "Master : \(master)"
+            if master != 0 {
+                self.caculateProgressPhase(self.vMaster, color: MASTER_TAG_COLOR,
+                    origiX: 0, numberCard: master)
+                self.updateProgressPhase(self.vReview, origiX: self.vMaster.frame.width,
+                    width: self.vReview.frame.width, height: self.vReview.frame.height)
+                self.updateProgressPhase(self.vLearning, origiX: self.vMaster.frame.width +
+                    self.vReview.frame.width,
+                    width: self.vLearning.frame.width, height: self.vLearning.frame.height)
+
+            }
         }
         
         _ = numberOfReviewing.asObservable().subscribeNext {
             review in
            self.lblReview.text = "Review : \(review)"
+            if review != 0 {
+                self.caculateProgressPhase(self.vReview, color: REVIEW_TAG_COLOR,
+                    origiX: self.vMaster.frame.width, numberCard: review)
+                self.updateProgressPhase(self.vLearning, origiX: self.vMaster.frame.width +
+                    self.vReview.frame.width,
+                    width: self.vLearning.frame.width, height: self.vLearning.frame.height)
+            }
         }
         
         _ = numberOfLearning.asObservable().subscribeNext {
             learning in
             self.lblLearning.text = "Learning : \(learning)"
+            if learning != 0 {
+                self.caculateProgressPhase(self.vLearning, color: LEARNING_TAG_COLOR,
+                    origiX: self.vReview.frame.width + self.vMaster.frame.width, numberCard: learning)
+            }
         }
        
+    }
+    
+    func caculateProgressPhase(view : UIView, color : UIColor, origiX : CGFloat, numberCard : Int) {
+        let totalQuestion = self.cardCollection.count
+        let width = self.vProgress.layer.bounds.width
+        let vHeight = self.vProgress.layer.bounds.height
+        let vWidth = CGFloat(numberCard)*width/CGFloat(totalQuestion)
+        let frame = CGRectMake(origiX, 0, vWidth, vHeight)
+        view.frame = frame
+        view.backgroundColor = color
+        view.removeFromSuperview()
+        self.vProgress.addSubview(view)
+    }
+    
+    func updateProgressPhase(view : UIView, origiX : CGFloat, width : CGFloat, height : CGFloat) {
+        let frame = CGRectMake(origiX, 0, width, height)
+        view.frame = frame
     }
     
     //MARK: Dump data
