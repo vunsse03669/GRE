@@ -20,6 +20,9 @@ class FlashCardViewController: UIViewController {
     @IBOutlet weak var lblMaster: UILabel!
     @IBOutlet weak var lblLearning: UILabel!
     @IBOutlet weak var vProgress: UIView!
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var btnSound: UIButton!
     
     var vMaster   : UIView!
     var vReview   : UIView!
@@ -67,6 +70,7 @@ class FlashCardViewController: UIViewController {
     
     //MARK: Config UI
     func configLayout() {
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         self.vFlashCard.layoutIfNeeded()
         
         // Load FrontFlashCardView
