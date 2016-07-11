@@ -57,7 +57,7 @@
                                 <constraint firstAttribute="height" constant="20" id="wpH-8V-Tcg"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIw-Mm-XdG">
@@ -66,7 +66,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW WORD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTF-cl-Pjp">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -83,13 +83,13 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J58-aN-GSs">
                             <rect key="frame" x="8" y="74" width="407" height="14"/>
                             <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRz-1G-QBP">
                             <rect key="frame" x="8" y="52" width="407" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -128,6 +128,7 @@
                 <outlet property="lblType" destination="CRz-1G-QBP" id="rqY-eD-Ys4"/>
                 <outlet property="lblWord" destination="xOo-ak-oCY" id="QOS-cb-HOn"/>
                 <outlet property="vContent" destination="zAL-MU-xrP" id="j2a-hD-Usv"/>
+                <outlet property="vTag" destination="KIw-Mm-XdG" id="fmy-cN-TdM"/>
             </connections>
             <point key="canvasLocation" x="382.5" y="138.5"/>
         </view>
