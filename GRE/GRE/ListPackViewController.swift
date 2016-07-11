@@ -9,5 +9,9 @@
 import UIKit
 
 class ListPackViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
 
 }
