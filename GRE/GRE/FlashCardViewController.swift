@@ -127,7 +127,7 @@ class FlashCardViewController: UIViewController {
         
         _ = self.nextCardVariable.asObservable().subscribeNext {
             next in
-            
+            let card = self.cardCollection[self.currentCard]
             if next != "" {
                 
                 UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)

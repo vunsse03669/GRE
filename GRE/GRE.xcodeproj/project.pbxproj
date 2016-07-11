@@ -20,6 +20,8 @@
 		99E21D7D1D2E4F2200F540F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99E21D7B1D2E4F2200F540F6 /* LaunchScreen.storyboard */; };
 		99E21DAA1D2E621D00F540F6 /* ListPackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E21DA91D2E621D00F540F6 /* ListPackViewController.swift */; };
 		99E21DAC1D2E661A00F540F6 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E21DAB1D2E661A00F540F6 /* Card.swift */; };
+		E80356D11D33B8F00043AB56 /* clvPackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80356CF1D33B8F00043AB56 /* clvPackCell.swift */; };
+		E80356D21D33B8F00043AB56 /* clvPackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E80356D01D33B8F00043AB56 /* clvPackCell.xib */; };
 		E8B4082D1D2ECA9F00970B8C /* PackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4082C1D2ECA9F00970B8C /* PackCard.swift */; };
 		E8B4082F1D2ECD4400970B8C /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4082E1D2ECD4400970B8C /* DB.swift */; };
 		E8B408321D2ED02200970B8C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B408311D2ED02200970B8C /* Constant.swift */; };
@@ -43,6 +45,8 @@
 		99E21D7E1D2E4F2200F540F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99E21DA91D2E621D00F540F6 /* ListPackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPackViewController.swift; sourceTree = "<group>"; };
 		99E21DAB1D2E661A00F540F6 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		E80356CF1D33B8F00043AB56 /* clvPackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = clvPackCell.swift; sourceTree = "<group>"; };
+		E80356D01D33B8F00043AB56 /* clvPackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = clvPackCell.xib; sourceTree = "<group>"; };
 		E8B4082C1D2ECA9F00970B8C /* PackCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackCard.swift; sourceTree = "<group>"; };
 		E8B4082E1D2ECD4400970B8C /* DB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		E8B408311D2ED02200970B8C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		99E21DA71D2E61B600F540F6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E80356CE1D33B8AB0043AB56 /* CustomCell */,
 				99E21D791D2E4F2200F540F6 /* Assets.xcassets */,
 				99E21D761D2E4F2200F540F6 /* Main.storyboard */,
 				99E21D7B1D2E4F2200F540F6 /* LaunchScreen.storyboard */,
@@ -140,6 +145,15 @@
 				8DA2F1E6059B73F08C67B814 /* Pods_GRE.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E80356CE1D33B8AB0043AB56 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				E80356CF1D33B8F00043AB56 /* clvPackCell.swift */,
+				E80356D01D33B8F00043AB56 /* clvPackCell.xib */,
+			);
+			name = CustomCell;
 			sourceTree = "<group>";
 		};
 		E8B408301D2ED00000970B8C /* Ultilities */ = {
@@ -215,6 +229,7 @@
 				99E21D7D1D2E4F2200F540F6 /* LaunchScreen.storyboard in Resources */,
 				991BD00E1D322FFC00A41B0A /* text.txt in Resources */,
 				99E21D7A1D2E4F2200F540F6 /* Assets.xcassets in Resources */,
+				E80356D21D33B8F00043AB56 /* clvPackCell.xib in Resources */,
 				99C35ADA1D31490A007E549E /* BackFlashCardView.xib in Resources */,
 				99E21D781D2E4F2200F540F6 /* Main.storyboard in Resources */,
 				99C35AD61D3133A6007E549E /* FrontFlashCardView.xib in Resources */,
@@ -280,6 +295,7 @@
 				99C35AD01D313147007E549E /* FlashCardViewController.swift in Sources */,
 				99E21DAC1D2E661A00F540F6 /* Card.swift in Sources */,
 				E8B4082D1D2ECA9F00970B8C /* PackCard.swift in Sources */,
+				E80356D11D33B8F00043AB56 /* clvPackCell.swift in Sources */,
 				E8B4082F1D2ECD4400970B8C /* DB.swift in Sources */,
 				99C35AD41D313385007E549E /* FrontFlashCardViewModel.swift in Sources */,
 				99E21DAA1D2E621D00F540F6 /* ListPackViewController.swift in Sources */,
