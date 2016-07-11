@@ -111,7 +111,7 @@
         <!--Flash Card View Controller-->
         <scene sceneID="e08-v6-g8m">
             <objects>
-                <viewController storyboardIdentifier="FlashCardViewController" id="3GB-nW-2JY" customClass="FlashCardViewController" customModule="GRE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3GB-nW-2JY" customClass="FlashCardViewController" customModule="GRE" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HQ3-Ul-8Mh"/>
                         <viewControllerLayoutGuide type="bottom" id="eKd-zS-e28"/>
