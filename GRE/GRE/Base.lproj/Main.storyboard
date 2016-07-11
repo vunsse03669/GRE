@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3GB-nW-2JY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -111,7 +111,7 @@
         <!--Flash Card View Controller-->
         <scene sceneID="e08-v6-g8m">
             <objects>
-                <viewController id="3GB-nW-2JY" customClass="FlashCardViewController" customModule="GRE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FlashCardViewController" id="3GB-nW-2JY" customClass="FlashCardViewController" customModule="GRE" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HQ3-Ul-8Mh"/>
                         <viewControllerLayoutGuide type="bottom" id="eKd-zS-e28"/>
@@ -272,11 +272,8 @@
         </scene>
     </scenes>
     <resources>
-<<<<<<< HEAD
-        <image name="img-settings" width="30" height="30"/>
-=======
         <image name="img-back" width="22" height="22"/>
+        <image name="img-settings" width="30" height="30"/>
         <image name="img-sound" width="22" height="22"/>
->>>>>>> a7f1e67222f204e9a95b2c87e4e443a391d16dca
     </resources>
 </document>
