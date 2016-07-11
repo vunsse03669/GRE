@@ -18,3 +18,6 @@ let MASTER_TAG_COLOR      = UIColor(netHex: 0x8bc34a)
 let LEARNING_TAG_COLOR    = UIColor(netHex: 0xe74c3c)
 let REVIEW_TAG_COLOR      = UIColor(netHex: 0x00bcd4)
 let NEW_WORD_TAG_COLOR    = UIColor(netHex: 0x607d8b)
+
+
+

@@ -22,7 +22,7 @@ class PackCard:Object{
         newPack.name = name
         newPack.cards = cards
         newPack.numberCard = cards.count
-        newPack.numberMasterCard = 0
+        newPack.numberMasterCard = cards.count//0
         newPack.numberReviewCard = 0
         newPack.numberLearningCard = 0
         DB.createPack(newPack)

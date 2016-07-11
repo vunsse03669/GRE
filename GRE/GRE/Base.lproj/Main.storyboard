@@ -28,16 +28,13 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsh-JD-fQS">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsh-JD-fQS">
                                         <rect key="frame" x="562" y="7" width="30" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hsh-JD-fQS" secondAttribute="height" id="G1S-SR-WOx"/>
                                             <constraint firstAttribute="height" constant="30" id="tOz-OT-pJl"/>
                                         </constraints>
-                                        <state key="normal" title="0">
-                                            <color key="titleColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                        <state key="normal" image="img-settings"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,7 +57,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0me-tI-8QW">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vkj-OB-a0j">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vkj-OB-a0j">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RyW-SI-s6C">
@@ -114,7 +111,7 @@
         <!--Flash Card View Controller-->
         <scene sceneID="e08-v6-g8m">
             <objects>
-                <viewController id="3GB-nW-2JY" customClass="FlashCardViewController" customModule="GRE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FlashCardViewController" id="3GB-nW-2JY" customClass="FlashCardViewController" customModule="GRE" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HQ3-Ul-8Mh"/>
                         <viewControllerLayoutGuide type="bottom" id="eKd-zS-e28"/>
@@ -219,4 +216,7 @@
             <point key="canvasLocation" x="892" y="482"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="img-settings" width="30" height="30"/>
+    </resources>
 </document>

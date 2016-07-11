@@ -9,8 +9,10 @@
 import UIKit
 
 class clvPackCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var lblRemaining: UILabel!
+    @IBOutlet weak var progessDone: UIProgressView!
+    @IBOutlet weak var imgDone: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
     override func awakeFromNib() {
@@ -19,6 +21,16 @@ class clvPackCell: UICollectionViewCell {
         self.layer.cornerRadius = 3.0;
     }
     func cellWith(pack : PackCard){
-        
+       // self.backgroundColor = COMMON1_PACK_COLOR
+        lblTitle.text = pack.name;
+        lblTotal.text = "\(pack.cards.count) cards in this pack"
+        if(pack.cards.count - pack.numberMasterCard == 0){
+            lblRemaining.text = "All cards mastered"
+            imgDone.image = UIImage.init(named: "img-check")
+        }
+        else{
+            lblRemaining.text = "\(pack.cards.count - pack.numberMasterCard) remaining to master"
+        }
+        progessDone.setProgress(Float(pack.numberMasterCard/pack.cards.count), animated: false)
     }
 }

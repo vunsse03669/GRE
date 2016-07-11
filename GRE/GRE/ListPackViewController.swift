@@ -25,7 +25,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
         super.viewDidLoad()
         dumpData()
         clvPack.registerNib(UINib.init(nibName: "clvPackCell", bundle: nil), forCellWithReuseIdentifier: "clvPackCell")
-            }
+    }
     func configCollectionView() {
         self.view.layoutIfNeeded()
     }
@@ -72,9 +72,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as? clvPackCell
         }
         let selectedPack : PackCard = packs[0]
-        cell.lblTitle.text = selectedPack.name
-        cell.lblTotal.text = "\(selectedPack.cards.count) cards in this pack";
-        cell.lblRemaining.text = "\(selectedPack.cards.count) remaining to master";
+        cell.cellWith(selectedPack)
         return cell
     }
     
@@ -98,7 +96,13 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
     
     //MARK: CollectionView Delegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        let flashCard : FlashCardViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("FlashCardViewController") as? FlashCardViewController)!
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        view.window!.layer.addAnimation(transition, forKey: kCATransition)
+        presentViewController(flashCard, animated: false, completion: nil)
     }
     
     
