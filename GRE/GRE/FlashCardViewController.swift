@@ -99,6 +99,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     func nextCard(view : SpringView) {
+        view.delay = 0.1
         view.animateNext {
             view.animation = "slideRight"
             view.animateTo()
