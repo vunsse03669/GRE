@@ -20,7 +20,11 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
     @IBOutlet weak var clvPack: UICollectionView!
     
     
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        packs = DB.getAllPacks()
+        clvPack.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         dumpData()
@@ -51,6 +55,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
                 PackCard .create(name, cards:listCard)
             }
             packs = DB.getAllPacks()
+            clvPack.reloadData()
             print("[List Pack]numberPacks : \(packs.count)")
         } else {
             print("file not exists")
@@ -74,6 +79,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
         
         let selectedPack : PackCard = packs[indexPath.row]
         cell.cellWith(selectedPack)
+        print("------\(DB.getNumberTagOfPack(selectedPack, tag: MASTER_TAG))   \(selectedPack.numberMasterCard)-----")
         return cell
     }
     
