@@ -136,7 +136,7 @@
                                                 <state key="normal" image="img-sound"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Back" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72l-Xy-bSb">
-                                                <rect key="frame" x="57" y="12" width="58" height="21"/>
+                                                <rect key="frame" x="49" y="12" width="58" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="58" id="NJP-zH-8h2"/>
                                                     <constraint firstAttribute="height" constant="21" id="esG-6U-sYU"/>
@@ -164,7 +164,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="OpF-j7-Bsr" firstAttribute="centerY" secondItem="LzU-x6-j0H" secondAttribute="centerY" id="1L0-zm-Fxw"/>
-                                            <constraint firstItem="72l-Xy-bSb" firstAttribute="leading" secondItem="4gw-lS-n3u" secondAttribute="trailing" constant="8" id="3NS-HL-cbq"/>
+                                            <constraint firstItem="72l-Xy-bSb" firstAttribute="leading" secondItem="4gw-lS-n3u" secondAttribute="trailing" id="3NS-HL-cbq"/>
                                             <constraint firstItem="cdb-d1-Lo2" firstAttribute="centerY" secondItem="LzU-x6-j0H" secondAttribute="centerY" id="Hco-Fl-75s"/>
                                             <constraint firstItem="72l-Xy-bSb" firstAttribute="centerY" secondItem="LzU-x6-j0H" secondAttribute="centerY" id="Sxn-eG-SYv"/>
                                             <constraint firstAttribute="height" constant="44" id="X28-Rc-cqB"/>
