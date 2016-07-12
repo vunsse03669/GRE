@@ -12,7 +12,7 @@ import RxCocoa
 import SwiftyJSON
 import AVFoundation
 
-class FlashCardViewController: UIViewController {
+class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     @IBOutlet weak var vFlashCard: UIView!
     @IBOutlet weak var lblTotal: UILabel!
@@ -40,8 +40,8 @@ class FlashCardViewController: UIViewController {
     var cardCollection = [Card]()
     var currentPack : PackCard!
     var packIndex : Int!
-    
-    var nextCardVariable  = Variable("")
+
+    var isStopSpeak       = Variable(false)
     var numberOfLearning  : Variable<Int> = Variable(0)
     var numberOfReviewing : Variable<Int> = Variable(0)
     var numberOfMaster    : Variable<Int> = Variable(0)
@@ -56,6 +56,7 @@ class FlashCardViewController: UIViewController {
         self.speakWord()
         
         synthesizer = AVSpeechSynthesizer()
+        synthesizer.delegate = self
         
         self.frontFlashCard.card = self.cardCollection[self.currentCard]
         self.backFlashCard.card  = self.cardCollection[self.currentCard]
@@ -75,6 +76,7 @@ class FlashCardViewController: UIViewController {
     
     func backToPackList() {
         _ = self.btnBack.rx_tap.subscribeNext {
+            self.synthesizer.stopSpeakingAtBoundary(.Word)
             self.dismissViewControllerAnimated(true, completion: nil)
             UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
         }
@@ -258,9 +260,10 @@ class FlashCardViewController: UIViewController {
         
     }
     
-    // Speak word
+    //MARK: Speak word
     func speakWord() {
         _ = self.btnSound.rx_tap.subscribeNext {
+            self.btnSound.userInteractionEnabled = false
             var text = ""
             if !self.isFlip {
                  text = self.cardCollection[self.currentCard].word
@@ -273,5 +276,9 @@ class FlashCardViewController: UIViewController {
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
             self.synthesizer.speakUtterance(utterance)
         }
+    }
+    // AVSpeach delegate
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
+        self.btnSound.userInteractionEnabled = true
     }
 }
