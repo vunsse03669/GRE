@@ -79,6 +79,7 @@ class FlashCardViewController: UIViewController {
     func flipFlashCard() {
         let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width,
                                        self.backFlashCard.height)
+        self.synthesizer.stopSpeakingAtBoundary(.Word)
         self.backFlashCard.frame = frameBackCard
         if !self.isFlip {
             UIView.transitionFromView(frontFlashCard, toView: backFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
@@ -192,6 +193,7 @@ class FlashCardViewController: UIViewController {
         
         _ = self.btnNotKnew.rx_tap.subscribeNext {
             UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+            self.synthesizer.stopSpeakingAtBoundary(.Word)
             self.isFlip = false
             let card = self.cardCollection[self.currentCard]
             if card.tag == MASTER_TAG {
@@ -219,6 +221,7 @@ class FlashCardViewController: UIViewController {
         
         _ = self.btnKnew.rx_tap.subscribeNext {
             UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+            self.synthesizer.stopSpeakingAtBoundary(.Word)
             self.isFlip = false
             let card = self.cardCollection[self.currentCard]
             if card.tag == NEW_WORD_TAG {
@@ -252,7 +255,13 @@ class FlashCardViewController: UIViewController {
     // Speak word
     func speakWord() {
         _ = self.btnSound.rx_tap.subscribeNext {
-            let text = self.cardCollection[self.currentCard].word
+            var text = ""
+            if !self.isFlip {
+                 text = self.cardCollection[self.currentCard].word
+            }
+            else {
+                text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)"
+            }
             let utterance = AVSpeechUtterance(string: text)
             utterance.rate = 0.5
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
