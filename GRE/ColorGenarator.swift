@@ -21,8 +21,9 @@ class ColorGenarator {
         UIColor.init(hue: 173.9/360.0, saturation: 100/100.0, brightness: 26.9/100.0, alpha: 1),
         UIColor.init(hue: 95.2/360.0, saturation: 49.5/100.0, brightness: 36.5/100.0, alpha: 1),
         UIColor.init(hue: 59.5/360.0, saturation: 62.9/100.0, brightness: 38/100.0, alpha: 1),
-        UIColor.init(hue: 21.1/360.0, saturation: 100/100.0, brightness: 45.1/100.0, alpha: 1)
-        //        UIColor.init(hue: 13.9/360.0, saturation: 65.4/100.0, brightness: 37.8/100.0, alpha: 1)
+        UIColor.init(hue: 21.1/360.0, saturation: 100/100.0, brightness: 45.1/100.0, alpha: 1),
+        UIColor.init(hue: 13.9/360.0, saturation: 65.4/100.0, brightness: 37.8/100.0, alpha: 1),
+        UIColor.init(hue: 4.1/360.0, saturation: 89.6/100.0, brightness: 58.4/100.0, alpha: 1)
     ]
     
     static func getColor(index: Int) -> UIColor{
@@ -34,10 +35,7 @@ class ColorGenarator {
         let rangeStep = 100/Float(seedColors.count-1);
         var colors = getColorsFromSeed(Int(floor(grandPercentage/rangeStep)));
         let percentage = (grandPercentage%rangeStep)*Float(seedColors.count-1)/100.0;
-        
-        
-        
-        
+    
         var hsl1 : (hue:CGFloat, sat: CGFloat, light: CGFloat) = (0,0,0);
         var hsl2 : (hue:CGFloat, sat: CGFloat, light: CGFloat) = (0,0,0);
         

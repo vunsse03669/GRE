@@ -25,11 +25,17 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
         packs = DB.getAllPacks()
         clvPack.reloadData()
     }
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        clvPack.layoutIfNeeded()
+        clvPack .reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dumpData()
         clvPack.registerNib(UINib.init(nibName: "clvPackCell", bundle: nil), forCellWithReuseIdentifier: "clvPackCell")
     }
+    
     func configCollectionView() {
         self.view.layoutIfNeeded()
     }

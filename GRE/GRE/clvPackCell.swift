@@ -25,12 +25,13 @@ class clvPackCell: UICollectionViewCell {
         lblTitle.text = pack.name;
         lblTotal.text = "\(pack.cards.count) cards in this pack"
         let numberMasterCard = DB.getNumberTagOfPack(pack, tag: MASTER_TAG)
-        if(pack.cards.count - pack.numberMasterCard == 0){
+        if(pack.cards.count == numberMasterCard){
             lblRemaining.text = "All cards mastered"
             imgDone.image = UIImage.init(named: "img-check")
         }
         else{
             lblRemaining.text = "\(pack.cards.count - numberMasterCard) remaining to master"
+             imgDone.image = nil
         }
        progessDone.setProgress(Float(numberMasterCard)/Float(pack.cards.count), animated: false)
     }
