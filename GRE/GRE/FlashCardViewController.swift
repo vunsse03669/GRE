@@ -26,6 +26,8 @@ class FlashCardViewController: UIViewController {
     @IBOutlet weak var btnNotKnew: UIButton!
     @IBOutlet weak var btnKnew: UIButton!
     @IBOutlet weak var btnSpeak: UIButton!
+    @IBOutlet weak var vNavigationBar: UIView!
+    @IBOutlet weak var vContent: UIView!
     
     var vMaster   : UIView!
     var vReview   : UIView!
@@ -37,6 +39,7 @@ class FlashCardViewController: UIViewController {
     var currentCard = 0
     var cardCollection = [Card]()
     var currentPack : PackCard!
+    var packIndex : Int!
     
     var nextCardVariable  = Variable("")
     var numberOfLearning  : Variable<Int> = Variable(0)
@@ -96,7 +99,9 @@ class FlashCardViewController: UIViewController {
     func configLayout() {
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         self.vFlashCard.layoutIfNeeded()
-        
+        //set backgorund View
+        self.vNavigationBar.backgroundColor = ColorGenarator.getColor(packIndex)
+        self.vContent.backgroundColor = ColorGenarator.getColor(packIndex)
         // Load FrontFlashCardView
         self.frontFlashCard = NSBundle.mainBundle().loadNibNamed("FrontFlashCardView", owner: self, options: nil) [0] as! FrontFlashCardViewModel
         let frameFrontCard = CGRectMake(0, 0, self.vFlashCard.layer.frame.size.width,

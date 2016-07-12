@@ -111,6 +111,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let flashCard : FlashCardViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("FlashCardViewController") as? FlashCardViewController)!
         flashCard.currentPack = packs[indexPath.row]
+        flashCard.packIndex = indexPath.row
         let transition = CATransition()
         transition.duration = 0.3
         transition.type = kCATransitionPush
