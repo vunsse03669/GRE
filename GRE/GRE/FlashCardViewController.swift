@@ -33,6 +33,7 @@ class FlashCardViewController: UIViewController {
     var isFlip = false
     var currentCard = 0
     var cardCollection = [Card]()
+    var currentPack : PackCard!
     
     var nextCardVariable  = Variable("")
     var numberOfLearning  : Variable<Int> = Variable(0)
@@ -44,7 +45,7 @@ class FlashCardViewController: UIViewController {
         super.viewDidLoad()
         self.configLayout()
         self.dumpData()
-        
+        print(currentPack.name)
         vFlashCard.userInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer.init()
         _ = tapGesture.rx_event.subscribeNext {

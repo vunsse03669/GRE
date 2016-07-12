@@ -59,7 +59,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
     
     //MARK: CollectionView datasource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30//packs.count;
+        return packs.count;
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
@@ -71,7 +71,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
             collectionView.registerNib(UINib(nibName: identifier, bundle: nil), forCellWithReuseIdentifier: identifier)
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as? clvPackCell
         }
-        let selectedPack : PackCard = packs[0]
+        let selectedPack : PackCard = packs[indexPath.row]
         cell.cellWith(selectedPack)
         return cell
     }
@@ -97,6 +97,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
     //MARK: CollectionView Delegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let flashCard : FlashCardViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("FlashCardViewController") as? FlashCardViewController)!
+        flashCard.currentPack = packs[indexPath.row]
         let transition = CATransition()
         transition.duration = 0.3
         transition.type = kCATransitionPush
