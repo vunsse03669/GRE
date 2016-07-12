@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SwiftyJSON
+import AVFoundation
 
 class FlashCardViewController: UIViewController {
     
@@ -24,6 +25,7 @@ class FlashCardViewController: UIViewController {
     @IBOutlet weak var btnSound: UIButton!
     @IBOutlet weak var btnNotKnew: UIButton!
     @IBOutlet weak var btnKnew: UIButton!
+    @IBOutlet weak var btnSpeak: UIButton!
     
     var vMaster   : UIView!
     var vReview   : UIView!
@@ -41,11 +43,16 @@ class FlashCardViewController: UIViewController {
     var numberOfReviewing : Variable<Int> = Variable(0)
     var numberOfMaster    : Variable<Int> = Variable(0)
     
+    var synthesizer : AVSpeechSynthesizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configLayout()
         self.dumpData()
         self.backToPackList()
+        self.speakWord()
+        
+        synthesizer = AVSpeechSynthesizer()
         
         self.frontFlashCard.card = self.cardCollection[self.currentCard]
         self.backFlashCard.card  = self.cardCollection[self.currentCard]
@@ -240,6 +247,16 @@ class FlashCardViewController: UIViewController {
             self.backFlashCard.card  = self.cardCollection[self.currentCard]
         }
         
-        
+    }
+    
+    // Speak word
+    func speakWord() {
+        _ = self.btnSound.rx_tap.subscribeNext {
+            let text = self.cardCollection[self.currentCard].word
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.rate = 0.5
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            self.synthesizer.speakUtterance(utterance)
+        }
     }
 }

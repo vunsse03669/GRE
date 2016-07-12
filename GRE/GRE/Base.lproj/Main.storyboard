@@ -344,6 +344,7 @@
                         <outlet property="btnKnew" destination="BKc-yN-nX0" id="uSZ-ZJ-9Pq"/>
                         <outlet property="btnNotKnew" destination="egC-Bv-TPH" id="bi0-GE-sw0"/>
                         <outlet property="btnSound" destination="OpF-j7-Bsr" id="lml-eZ-vsQ"/>
+                        <outlet property="btnSpeak" destination="OpF-j7-Bsr" id="mDf-e1-9sU"/>
                         <outlet property="lblLearning" destination="YuL-Ql-3Jc" id="GDa-uc-goV"/>
                         <outlet property="lblMaster" destination="uKJ-qF-DLM" id="7nM-Js-geB"/>
                         <outlet property="lblReview" destination="hFV-mR-pgT" id="btj-PS-akr"/>
