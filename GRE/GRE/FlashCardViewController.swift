@@ -164,37 +164,30 @@ class FlashCardViewController: UIViewController {
     
     //MARK: Dump data
     func dumpData() {
-        if let file = NSBundle(forClass:AppDelegate.self).pathForResource("text", ofType: "txt") {
-            let data = NSData(contentsOfFile: file)!
-            let json = JSON(data:data)
+        
+        for index in 0..<self.currentPack.cards.count {
+            let jsonCard = self.currentPack.cards[index]
+            let word     = jsonCard.word
+            let type     = jsonCard.type
+            let script   = jsonCard.script
+            let tag      = jsonCard.tag
+            print(word)
             
-            for index in 0..<json[0]["card"].count {
-                let jsonCard = json[0]["card"][index]
-                let word     = jsonCard["word"].string!
-                let type     = jsonCard["type"].string!
-                let script   = jsonCard["script"].string!
-                let tag      = jsonCard["tag"].string!
-                print(word)
-                
-                if DB.getCardByWord(word) == nil {
-                    let card = Card.create(word, type: type, script: script, tag: tag)
-                    self.cardCollection.append(card)
-                }
-                else {
-                    self.cardCollection.append(DB.getCardByWord(word))
-                }
+            if DB.getCardByWord(word) == nil {
+                let card = Card.create(word, type: type, script: script, tag: tag)
+                self.cardCollection.append(card)
             }
-            self.bindingData()
-        } else {
-            print("file not exists")
+            else {
+                self.cardCollection.append(DB.getCardByWord(word))
+            }
         }
+        self.bindingData()
     }
     
     func bindingData() {
         
         _ = self.nextCardVariable.asObservable().subscribeNext {
             next in
-            
             if next != "" {
                 
                 UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
@@ -242,7 +235,6 @@ class FlashCardViewController: UIViewController {
             
             self.frontFlashCard.card = self.cardCollection[self.currentCard]
             self.backFlashCard.card  = self.cardCollection[self.currentCard]
-            
             
         }
     }
