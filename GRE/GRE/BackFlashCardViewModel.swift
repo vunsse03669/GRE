@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Spring
 import RxCocoa
 import RxSwift
 
-class BackFlashCardViewModel: UIView {
+class BackFlashCardViewModel: SpringView {
 
     @IBOutlet weak var vContent: UIView!
     @IBOutlet weak var lblWord: UILabel!

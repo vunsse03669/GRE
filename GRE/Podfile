@@ -8,5 +8,6 @@ pod 'RxSwift'
 pod 'RxCocoa'
 pod 'RealmSwift'
 pod 'SwiftyJSON'
+pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
 end
 

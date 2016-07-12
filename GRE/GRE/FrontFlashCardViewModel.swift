@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Spring
 
-class FrontFlashCardViewModel: UIView {
+class FrontFlashCardViewModel: SpringView {
     
     @IBOutlet weak var vTag: UIView!
     @IBOutlet weak var lblWord: UILabel!

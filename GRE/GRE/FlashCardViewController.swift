@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import SwiftyJSON
 import AVFoundation
+import Spring
 
 class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
@@ -81,7 +82,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
             UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
         }
     }
-    
+    //MARK: Animation
     func flipFlashCard() {
         let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width,
                                        self.backFlashCard.height)
@@ -94,6 +95,21 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         else {
             UIView.transitionFromView(backFlashCard, toView: frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
             self.isFlip = false
+        }
+    }
+    
+    func nextCard(view : SpringView) {
+        view.animateNext {
+            view.animation = "slideRight"
+            view.animateTo()
+            view.x = 700
+            view.animateToNext {
+                view.animate()
+            }
+            view.x = 0
+            view.animateToNext {
+                view.animateTo()
+            }
         }
     }
     
@@ -200,7 +216,9 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     func bindingData() {
         
         _ = self.btnNotKnew.rx_tap.subscribeNext {
-            UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+            UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+            self.isFlip = false
+            self.nextCard(self.frontFlashCard)
             self.synthesizer.stopSpeakingAtBoundary(.Word)
             self.isFlip = false
             let card = self.cardCollection[self.currentCard]
@@ -228,7 +246,9 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         }
         
         _ = self.btnKnew.rx_tap.subscribeNext {
-            UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+            UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+            self.isFlip = false
+            self.nextCard(self.frontFlashCard)
             self.synthesizer.stopSpeakingAtBoundary(.Word)
             self.isFlip = false
             let card = self.cardCollection[self.currentCard]
