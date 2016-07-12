@@ -10,52 +10,48 @@ import Foundation
 import UIKit
 class ColorGenarator {
     /////////
-    static let rangeColor:Float = 3.0
+    static let stepDistance:Float = 3.0
+    static let colorOffset:Float = 0.0
     
     static let seedColors = [
-        UIColor.init(hue: 4.1/360.0, saturation: 89.6/100.0, brightness: 58.4/100.0, alpha: 1),
-        UIColor.init(hue: 291.2/360.0, saturation: 63.7/100.0, brightness: 42.2/100.0, alpha: 1),
-        UIColor.init(hue: 230.8/360.0, saturation: 48.4/100.0, brightness: 47.8/100.0, alpha: 1),
-        UIColor.init(hue: 208/360.0, saturation: 79.3/100.0, brightness: 50.8/100.0, alpha: 1),
-        UIColor.init(hue: 185/360.0, saturation: 100/100.0, brightness: 28/100.0, alpha: 1),
-        UIColor.init(hue: 173.9/360.0, saturation: 100/100.0, brightness: 26.9/100.0, alpha: 1),
-        UIColor.init(hue: 95.2/360.0, saturation: 49.5/100.0, brightness: 36.5/100.0, alpha: 1),
-        UIColor.init(hue: 59.5/360.0, saturation: 62.9/100.0, brightness: 38/100.0, alpha: 1),
-        UIColor.init(hue: 21.1/360.0, saturation: 100/100.0, brightness: 45.1/100.0, alpha: 1),
-        UIColor.init(hue: 13.9/360.0, saturation: 65.4/100.0, brightness: 37.8/100.0, alpha: 1),
-        UIColor.init(hue: 4.1/360.0, saturation: 89.6/100.0, brightness: 58.4/100.0, alpha: 1)
-    ]
+        
+        ColorGenarator.hexStringToUIColor("009688"),
+        ColorGenarator.hexStringToUIColor("039be5"),
+//        ColorGenarator.hexStringToUIColor("2196f3"),
+        ColorGenarator.hexStringToUIColor("3f51b5"),
+        ColorGenarator.hexStringToUIColor("673ab7"),
+        ColorGenarator.hexStringToUIColor("e91e63"),
+        ColorGenarator.hexStringToUIColor("f44336"),
+//        ColorGenarator.hexStringToUIColor("8d6e63"),
+        ColorGenarator.hexStringToUIColor("ef6c00"),
+        ColorGenarator.hexStringToUIColor("f9a825"),
+//        ColorGenarator.hexStringToUIColor("827717"),
+        ColorGenarator.hexStringToUIColor("689f38"),
+        ColorGenarator.hexStringToUIColor("388e3c"),
+        ColorGenarator.hexStringToUIColor("009688")
+        ]
     
     static func getColor(index: Int) -> UIColor{
         return mixByStep(index);
     }
     
     static func mixByStep(index:Int) -> UIColor{
-        let grandPercentage = Float(index)*rangeColor*1.618033988749895%100;
+        let grandPercentage = (colorOffset + Float(index)*stepDistance*1.618033988749895)%100;
         let rangeStep = 100/Float(seedColors.count-1);
         var colors = getColorsFromSeed(Int(floor(grandPercentage/rangeStep)));
-        let percentage = (grandPercentage%rangeStep)*Float(seedColors.count-1)/100.0;
+        let percentage = CGFloat(grandPercentage%rangeStep)*CGFloat(seedColors.count-1)/100.0;
     
-        var hsl1 : (hue:CGFloat, sat: CGFloat, light: CGFloat) = (0,0,0);
-        var hsl2 : (hue:CGFloat, sat: CGFloat, light: CGFloat) = (0,0,0);
+        var rgb1 : (red:CGFloat, green: CGFloat, blue: CGFloat) = (0,0,0);
+        var rgb2 : (red:CGFloat, green: CGFloat, blue: CGFloat) = (0,0,0);
         
-        colors[0].getHue(&hsl1.hue, saturation: &hsl1.sat, brightness: &hsl1.light, alpha: nil);
-        colors[1].getHue(&hsl2.hue, saturation: &hsl2.sat, brightness: &hsl2.light, alpha: nil);
+        colors[0].getRed(&rgb1.red, green: &rgb1.green, blue: &rgb1.blue, alpha: nil);
+        colors[1].getRed(&rgb2.red, green: &rgb2.green, blue: &rgb2.blue, alpha: nil);
         
-        var sum: CGFloat;
-        if(hsl2.hue - hsl1.hue > 0){
-           // print("\(hsl1.hue) , \(hsl2.hue)");
-            sum = (hsl1.hue+1)*CGFloat(1-percentage) + hsl2.hue*CGFloat(percentage);
-        }
-        else{
-            sum = hsl1.hue*CGFloat(1-percentage) + hsl2.hue*CGFloat(percentage);
-        }
+        let newRed = rgb1.red*(1-percentage) + rgb2.red*percentage;
+        let newGreen = rgb1.green*(1-percentage) + rgb2.green*percentage;
+        let newBlue = rgb1.blue*(1-percentage) + rgb2.blue*percentage;
         
-        let newHue = sum % 1;
-        let newSat = hsl1.sat*CGFloat(1-percentage) + hsl2.sat*CGFloat(percentage);
-        let newLight = hsl1.light*CGFloat(1-percentage) + hsl2.light*CGFloat(percentage);
-        //print("\(newHue) , \(newSat) ,\( newLight)");
-        return UIColor.init(hue: newHue, saturation: newSat, brightness: newLight, alpha: 1);
+        return UIColor.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1);
     }
     
     static func getColorsFromSeed(point: Int) -> [UIColor]{
@@ -63,6 +59,28 @@ class ColorGenarator {
             seedColors[point],
             seedColors[point+1]
         ]
+    }
+    
+    static func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = cString.substringFromIndex(cString.startIndex.advancedBy(1))
+        }
+        
+        if ((cString.characters.count) != 6) {
+            return UIColor.grayColor()
+        }
+        
+        var rgbValue:UInt32 = 0
+        NSScanner(string: cString).scanHexInt(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 
 }
