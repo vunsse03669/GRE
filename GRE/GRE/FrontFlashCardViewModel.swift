@@ -24,7 +24,8 @@ class FrontFlashCardViewModel: UIView {
         self.layer.shadowOpacity = 0.8
         self.layer.shadowOffset = CGSizeZero
         self.layer.shadowRadius = 5
-        self.layer.cornerRadius = 13
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
     }
     
     func layout() {
