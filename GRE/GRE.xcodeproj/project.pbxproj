@@ -23,6 +23,7 @@
 		99E21DAC1D2E661A00F540F6 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E21DAB1D2E661A00F540F6 /* Card.swift */; };
 		E80356D11D33B8F00043AB56 /* clvPackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80356CF1D33B8F00043AB56 /* clvPackCell.swift */; };
 		E80356D21D33B8F00043AB56 /* clvPackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E80356D01D33B8F00043AB56 /* clvPackCell.xib */; };
+		E812DDA81D3553090012D26C /* ColorGenarator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E812DDA71D3553090012D26C /* ColorGenarator.swift */; };
 		E8B4082D1D2ECA9F00970B8C /* PackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4082C1D2ECA9F00970B8C /* PackCard.swift */; };
 		E8B4082F1D2ECD4400970B8C /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4082E1D2ECD4400970B8C /* DB.swift */; };
 		E8B408321D2ED02200970B8C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B408311D2ED02200970B8C /* Constant.swift */; };
@@ -49,6 +50,7 @@
 		99E21DAB1D2E661A00F540F6 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E80356CF1D33B8F00043AB56 /* clvPackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = clvPackCell.swift; sourceTree = "<group>"; };
 		E80356D01D33B8F00043AB56 /* clvPackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = clvPackCell.xib; sourceTree = "<group>"; };
+		E812DDA71D3553090012D26C /* ColorGenarator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorGenarator.swift; path = ../ColorGenarator.swift; sourceTree = "<group>"; };
 		E8B4082C1D2ECA9F00970B8C /* PackCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackCard.swift; sourceTree = "<group>"; };
 		E8B4082E1D2ECD4400970B8C /* DB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		E8B408311D2ED02200970B8C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 		9909D5821D3351BC00B2D325 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E812DDA71D3553090012D26C /* ColorGenarator.swift */,
 				9909D5831D3351CE00B2D325 /* Apple */,
 				9909D5841D3351EA00B2D325 /* Vendor */,
 			);
@@ -319,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99E21D731D2E4F2200F540F6 /* AppDelegate.swift in Sources */,
+				E812DDA81D3553090012D26C /* ColorGenarator.swift in Sources */,
 				99C35AD01D313147007E549E /* FlashCardViewController.swift in Sources */,
 				99E21DAC1D2E661A00F540F6 /* Card.swift in Sources */,
 				E8B4082D1D2ECA9F00970B8C /* PackCard.swift in Sources */,

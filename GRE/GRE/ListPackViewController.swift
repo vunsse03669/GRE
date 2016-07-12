@@ -78,8 +78,8 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
         }
         
         let selectedPack : PackCard = packs[indexPath.row]
+        cell.backgroundColor = ColorGenarator.getColor(indexPath.row)
         cell.cellWith(selectedPack)
-        print("------\(DB.getNumberTagOfPack(selectedPack, tag: MASTER_TAG))   \(selectedPack.numberMasterCard)-----")
         return cell
     }
     
