@@ -73,6 +73,7 @@ class FlashCardViewController: UIViewController {
     func backToPackList() {
         _ = self.btnBack.rx_tap.subscribeNext {
             self.dismissViewControllerAnimated(true, completion: nil)
+            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
         }
     }
     
