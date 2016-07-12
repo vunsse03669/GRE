@@ -20,30 +20,21 @@ class BackFlashCardViewModel: UIView {
     @IBOutlet weak var btnKnew: UIButton!
     @IBOutlet weak var btnNotKnew: UIButton!
     @IBOutlet weak var vTag: UIView!
-    
+
     var height : CGFloat = 0
     var card : Card! {
         didSet{
             self.layout()
         }
     }
-    var nextCardFlag = Variable("")
     
     override func awakeFromNib() {
-        
-        _ = btnKnew.rx_tap.subscribeNext {
-            self.nextCardFlag.value = "knew"
-        }
-        _ = btnNotKnew.rx_tap.subscribeNext {
-            self.nextCardFlag.value = "notKnew"
-        }
-        
         self.layer.shadowColor = UIColor.grayColor().CGColor
         self.layer.shadowOpacity = 0.8
         self.layer.shadowOffset = CGSizeZero
         self.layer.shadowRadius = 5
-        self.layer.cornerRadius = 13
-        
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,7 +63,7 @@ class BackFlashCardViewModel: UIView {
         self.lblScript.sizeToFit()
         self.lblType.sizeToFit()
         self.height = self.lblWord.frame.size.height + self.lblType.frame.size.height
-            + self.lblScript.frame.size.height + 80 + 88
+            + self.lblScript.frame.size.height + 80
         
     }
 
