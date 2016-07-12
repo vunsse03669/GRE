@@ -33,9 +33,8 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
         if let file = NSBundle(forClass:AppDelegate.self).pathForResource("text", ofType: "txt") {
             let data = NSData(contentsOfFile: file)!
             let json = JSON(data:data)
-            print(json)
+            //print(json)
             for index in 0..<json.count{
-                print(index)
                 let name  = json[index]["name"].string!
                 let cards = json[index]["card"]
                 let listCard : List<Card> = List<Card>()
@@ -47,11 +46,12 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
                     let newCard : Card = Card.create(word, type: type, script: script, tag: tag);
                     listCard.append(newCard)
                 }
-                let newPack: PackCard = PackCard .create(name, cards:listCard)
-                packs.append(newPack)
-                clvPack.reloadData()
-                print(packs.count)
+                //let newPack: PackCard = PackCard .create(name, cards:listCard)
+                //packs.append(newPack)
+                PackCard .create(name, cards:listCard)
             }
+            packs = DB.getAllPacks()
+            print("[List Pack]numberPacks : \(packs.count)")
         } else {
             print("file not exists")
         }
@@ -71,6 +71,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
             collectionView.registerNib(UINib(nibName: identifier, bundle: nil), forCellWithReuseIdentifier: identifier)
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as? clvPackCell
         }
+        
         let selectedPack : PackCard = packs[indexPath.row]
         cell.cellWith(selectedPack)
         return cell
