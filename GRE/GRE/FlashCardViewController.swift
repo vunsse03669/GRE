@@ -264,7 +264,7 @@ class FlashCardViewController: UIViewController {
                 text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)"
             }
             let utterance = AVSpeechUtterance(string: text)
-            utterance.rate = 0.5
+            utterance.rate = 0.4
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
             self.synthesizer.speakUtterance(utterance)
         }
