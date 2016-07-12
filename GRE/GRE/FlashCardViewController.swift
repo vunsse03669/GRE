@@ -44,6 +44,7 @@ class FlashCardViewController: UIViewController {
         super.viewDidLoad()
         self.configLayout()
         self.dumpData()
+        self.backToPackList()
         
         vFlashCard.userInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer.init()
@@ -52,6 +53,12 @@ class FlashCardViewController: UIViewController {
             self.flipFlashCard()
         }
         self.vFlashCard.addGestureRecognizer(tapGesture)
+    }
+    
+    func backToPackList() {
+        _ = self.btnBack.rx_tap.subscribeNext {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     func flipFlashCard() {
