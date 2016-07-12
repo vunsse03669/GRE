@@ -46,7 +46,9 @@ class FlashCardViewController: UIViewController {
         self.configLayout()
         self.dumpData()
         self.backToPackList()
-        print(currentPack.name)
+        numberOfMaster.value = DB.getNumberTagOfPack(self.currentPack, tag: MASTER_TAG)
+        numberOfReviewing.value = DB.getNumberTagOfPack(self.currentPack, tag: REVIEW_TAG)
+        numberOfLearning.value = DB.getNumberTagOfPack(self.currentPack, tag: LEARNING_TAG)
         
         vFlashCard.userInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer.init()
@@ -102,54 +104,44 @@ class FlashCardViewController: UIViewController {
         _ = numberOfMaster.asObservable().subscribeNext {
             master in
             self.lblMaster.text = "Master : \(master)"
-            if master != 0 {
-                self.caculateProgressPhase(self.vMaster, color: MASTER_TAG_COLOR,
-                    origiX: 0, numberCard: master)
-                self.updateProgressPhase(self.vReview, origiX: self.vMaster.frame.width,
-                    width: self.vReview.frame.width, height: self.vReview.frame.height)
-                self.updateProgressPhase(self.vLearning, origiX: self.vMaster.frame.width +
-                    self.vReview.frame.width,
-                    width: self.vLearning.frame.width, height: self.vLearning.frame.height)
-
-            }
-            else {
-                let frame = CGRectMake(0, 0, 0, 0)
-                self.vMaster.frame = frame
-            }
+            self.caculateProgressPhase(self.vMaster, color: MASTER_TAG_COLOR,
+                origiX: 0, numberCard: master)
+            self.updateProgressPhase(self.vReview, origiX: self.vMaster.frame.width,
+                width: self.vReview.frame.width, height: self.vReview.frame.height)
+            self.updateProgressPhase(self.vLearning, origiX: self.vMaster.frame.width +
+                self.vReview.frame.width,
+                width: self.vLearning.frame.width, height: self.vLearning.frame.height)
         }
         
         _ = numberOfReviewing.asObservable().subscribeNext {
             review in
            self.lblReview.text = "Review : \(review)"
-            if review != 0 {
-                self.caculateProgressPhase(self.vReview, color: REVIEW_TAG_COLOR,
-                    origiX: self.vMaster.frame.width, numberCard: review)
-                self.updateProgressPhase(self.vLearning, origiX: self.vMaster.frame.width +
-                    self.vReview.frame.width,
-                    width: self.vLearning.frame.width, height: self.vLearning.frame.height)
-            }
-            else {
-                let frame = CGRectMake(0, 0, 0, 0)
-                self.vReview.frame = frame
-            }
+            self.caculateProgressPhase(self.vReview, color: REVIEW_TAG_COLOR,
+                origiX: self.vMaster.frame.width, numberCard: review)
+            self.updateProgressPhase(self.vLearning, origiX: self.vMaster.frame.width +
+                self.vReview.frame.width,
+                width: self.vLearning.frame.width, height: self.vLearning.frame.height)
         }
         
         _ = numberOfLearning.asObservable().subscribeNext {
             learning in
             self.lblLearning.text = "Learning : \(learning)"
-            if learning != 0 {
-                self.caculateProgressPhase(self.vLearning, color: LEARNING_TAG_COLOR,
-                    origiX: self.vReview.frame.width + self.vMaster.frame.width, numberCard: learning)
-            }
+            self.caculateProgressPhase(self.vLearning, color: LEARNING_TAG_COLOR,
+                origiX: self.vReview.frame.width + self.vMaster.frame.width, numberCard: learning)
         }
        
     }
     
     func caculateProgressPhase(view : UIView, color : UIColor, origiX : CGFloat, numberCard : Int) {
         let totalQuestion = self.cardCollection.count
+        self.vProgress.layoutIfNeeded()
         let width = self.vProgress.layer.bounds.width
         let vHeight = self.vProgress.layer.bounds.height
-        let vWidth = CGFloat(numberCard)*width/CGFloat(totalQuestion)
+        var vWidth : CGFloat = 0
+        if numberCard != 0 {
+            vWidth = CGFloat(numberCard)*width/CGFloat(totalQuestion)
+        }
+        
         let frame = CGRectMake(origiX, 0, vWidth, vHeight)
         view.frame = frame
         view.backgroundColor = color
@@ -171,7 +163,6 @@ class FlashCardViewController: UIViewController {
             let type     = jsonCard.type
             let script   = jsonCard.script
             let tag      = jsonCard.tag
-            print(word)
             
             if DB.getCardByWord(word) == nil {
                 let card = Card.create(word, type: type, script: script, tag: tag)
