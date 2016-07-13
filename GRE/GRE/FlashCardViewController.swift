@@ -26,7 +26,6 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     @IBOutlet weak var btnSound: UIButton!
     @IBOutlet weak var btnNotKnew: UIButton!
     @IBOutlet weak var btnKnew: UIButton!
-    @IBOutlet weak var btnSpeak: UIButton!
     @IBOutlet weak var vNavigationBar: UIView!
     @IBOutlet weak var vContent: UIView!
     
@@ -100,6 +99,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     func nextCard(view : SpringView) {
         view.delay = 0.1
+        view.velocity = 0.5
         view.animateNext {
             view.animation = "slideRight"
             view.animateTo()
@@ -300,6 +300,10 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     // AVSpeach delegate
     func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
+        self.btnSound.userInteractionEnabled = true
+    }
+    
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didCancelSpeechUtterance utterance: AVSpeechUtterance) {
         self.btnSound.userInteractionEnabled = true
     }
 }
