@@ -112,13 +112,14 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         view.animateNext {
             view.animation = "slideRight"
             view.animateTo()
-            view.x = 700
+            view.x = self.view.bounds.width + self.vFlashCard.bounds.width
             view.animateToNext {
                 view.animate()
             }
             view.x = 0
             view.animateToNext {
                 view.animateTo()
+                self.setButtuonEnable(true)
             }
         }
     }
@@ -199,7 +200,6 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         
         //add bar button
         addBarButton()
-        
     }
     
     func addBarButton(){
@@ -209,6 +209,11 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         btnBarSound.addTarget(self, action: #selector(speakWordNonRx), forControlEvents: .TouchUpInside)
         let btnBar = UIBarButtonItem.init(customView: btnBarSound)
         self.navigationItem.setRightBarButtonItem(btnBar, animated: true)
+    }
+    
+    func setButtuonEnable(enable : Bool) {
+        self.btnNotKnew.userInteractionEnabled = enable
+        self.btnKnew.userInteractionEnabled = enable
     }
     
     func caculateProgressPhase(view : UIView, color : UIColor, origiX : CGFloat, numberCard : Int) {
@@ -258,6 +263,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         
         _ = self.btnNotKnew.rx_tap.subscribeNext {
             UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+            self.setButtuonEnable(false)
             self.isFlip = false
             self.nextCard(self.frontFlashCard)
             self.synthesizer.stopSpeakingAtBoundary(.Word)
@@ -289,6 +295,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         _ = self.btnKnew.rx_tap.subscribeNext {
             UIView.transitionFromView(self.backFlashCard, toView: self.frontFlashCard, duration: 0, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
             self.isFlip = false
+            self.setButtuonEnable(false)
             self.nextCard(self.frontFlashCard)
             self.synthesizer.stopSpeakingAtBoundary(.Word)
             self.isFlip = false
