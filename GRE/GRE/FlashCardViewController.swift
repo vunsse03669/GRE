@@ -61,8 +61,8 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         super.viewDidLoad()
         self.configLayout()
         self.dumpData()
-        self.backToPackList()
-        self.speakWord()
+        //self.backToPackList()
+        //self.speakWord()
         
         synthesizer = AVSpeechSynthesizer()
         synthesizer.delegate = self
@@ -83,13 +83,13 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         self.vFlashCard.addGestureRecognizer(tapGesture)
     }
     
-    func backToPackList() {
-        _ = self.btnBack.rx_tap.subscribeNext {
-            self.synthesizer.stopSpeakingAtBoundary(.Word)
-            self.dismissViewControllerAnimated(true, completion: nil)
-            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
-        }
-    }
+//    func backToPackList() {
+//        _ = self.btnBack.rx_tap.subscribeNext {
+//            self.synthesizer.stopSpeakingAtBoundary(.Word)
+//            self.dismissViewControllerAnimated(true, completion: nil)
+//            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
+//        }
+//    }
     //MARK: Animation
     func flipFlashCard() {
         let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width,
@@ -310,22 +310,22 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     //MARK: Speak word
-    func speakWord() {
-        _ = self.btnSound.rx_tap.subscribeNext {
-            self.btnSound.userInteractionEnabled = false
-            var text = ""
-            if !self.isFlip {
-                text = self.cardCollection[self.currentCard].word
-            }
-            else {
-                text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)"
-            }
-            let utterance = AVSpeechUtterance(string: text)
-            utterance.rate = 0.4
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            self.synthesizer.speakUtterance(utterance)
-        }
-    }
+//    func speakWord() {
+//        _ = self.btnSound.rx_tap.subscribeNext {
+//            self.btnSound.userInteractionEnabled = false
+//            var text = ""
+//            if !self.isFlip {
+//                text = self.cardCollection[self.currentCard].word
+//            }
+//            else {
+//                text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)"
+//            }
+//            let utterance = AVSpeechUtterance(string: text)
+//            utterance.rate = 0.4
+//            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+//            self.synthesizer.speakUtterance(utterance)
+//        }
+//    }
     func speakWordNonRx(){
         self.btnBarSound.userInteractionEnabled = false
         var text = ""
