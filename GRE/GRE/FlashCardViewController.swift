@@ -50,6 +50,10 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     var synthesizer : AVSpeechSynthesizer!
     
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        updateLayout()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         configColor()
     }
@@ -83,25 +87,21 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         self.vFlashCard.addGestureRecognizer(tapGesture)
     }
     
-//    func backToPackList() {
-//        _ = self.btnBack.rx_tap.subscribeNext {
-//            self.synthesizer.stopSpeakingAtBoundary(.Word)
-//            self.dismissViewControllerAnimated(true, completion: nil)
-//            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
-//        }
-//    }
     //MARK: Animation
     func flipFlashCard() {
+        
+//        self.backFlashCard.updateLayout()
         let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width,
                                        self.backFlashCard.height)
         self.synthesizer.stopSpeakingAtBoundary(.Word)
         self.backFlashCard.frame = frameBackCard
+        updateLayout()
         if !self.isFlip {
-            UIView.transitionFromView(frontFlashCard, toView: backFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            UIView.transitionFromView(frontFlashCard, toView: backFlashCard, duration: 0.3, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
             self.isFlip = true
         }
         else {
-            UIView.transitionFromView(backFlashCard, toView: frontFlashCard, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
+            UIView.transitionFromView(backFlashCard, toView: frontFlashCard, duration: 0.3, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
             self.isFlip = false
         }
     }
@@ -134,6 +134,18 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         }
         
     }
+    
+    func updateLayout(){
+        self.vFlashCard.layoutIfNeeded()
+        self.vFlashCard.setNeedsLayout()
+        self.backFlashCard.setNeedsLayout()
+        self.backFlashCard.layoutIfNeeded()
+        let frameFrontCard = CGRectMake(0, 0, self.vFlashCard.layer.frame.size.width,
+                                        2*self.vFlashCard.layer.frame.size.height/3)
+        self.frontFlashCard.frame = frameFrontCard
+        self.backFlashCard.updateLayout()
+    }
+    
     func configLayout() {
         self.vFlashCard.layoutIfNeeded()
         
@@ -310,22 +322,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     //MARK: Speak word
-//    func speakWord() {
-//        _ = self.btnSound.rx_tap.subscribeNext {
-//            self.btnSound.userInteractionEnabled = false
-//            var text = ""
-//            if !self.isFlip {
-//                text = self.cardCollection[self.currentCard].word
-//            }
-//            else {
-//                text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)"
-//            }
-//            let utterance = AVSpeechUtterance(string: text)
-//            utterance.rate = 0.4
-//            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-//            self.synthesizer.speakUtterance(utterance)
-//        }
-//    }
+    
     func speakWordNonRx(){
         self.btnBarSound.userInteractionEnabled = false
         var text = ""
@@ -342,12 +339,12 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     // AVSpeach delegate
     func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
-        self.btnSound.userInteractionEnabled = true
+        //self.btnSound.userInteractionEnabled = true
         self.btnBarSound.userInteractionEnabled = true
     }
     
     func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didCancelSpeechUtterance utterance: AVSpeechUtterance) {
-        self.btnSound.userInteractionEnabled = true
+        //self.btnSound.userInteractionEnabled = true
         self.btnBarSound.userInteractionEnabled = true
     }
 }
