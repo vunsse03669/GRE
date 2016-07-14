@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             self.navigationController!.navigationBar.barTintColor = .whiteColor();
             self.navigationController!.navigationBar.tintColor = .blackColor();
         }
+        
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
 
         cards = DB.getAllCards()

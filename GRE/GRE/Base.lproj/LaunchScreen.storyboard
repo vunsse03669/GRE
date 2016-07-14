@@ -16,7 +16,21 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkY-L7-1tN">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="60"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zkY-L7-1tN" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="J3w-RX-Xdd"/>
+                            <constraint firstItem="zkY-L7-1tN" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="VyZ-Nl-c5a"/>
+                            <constraint firstItem="zkY-L7-1tN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bUk-Vr-MuO"/>
+                            <constraint firstItem="zkY-L7-1tN" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="fsl-Ic-8Pk"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

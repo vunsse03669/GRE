@@ -29,7 +29,7 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
         }
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
         packs = DB.getAllPacks()
-        // clvPack.reloadData()
+         clvPack.reloadData()
     }
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         clvPack.layoutIfNeeded()
