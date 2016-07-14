@@ -43,7 +43,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     var currentPack : PackCard!
     var packIndex : Int!
     
-    var isStopSpeak       = Variable(false)
+    var soundOn = Variable(false)
     var numberOfLearning  : Variable<Int> = Variable(0)
     var numberOfReviewing : Variable<Int> = Variable(0)
     var numberOfMaster    : Variable<Int> = Variable(0)
@@ -65,8 +65,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         super.viewDidLoad()
         self.configLayout()
         self.dumpData()
-        //self.backToPackList()
-        //self.speakWord()
+        self.soundOn.value = DB.getSoundOn()
         
         synthesizer = AVSpeechSynthesizer()
         synthesizer.delegate = self
@@ -85,14 +84,24 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
             self.flipFlashCard()
         }
         self.vFlashCard.addGestureRecognizer(tapGesture)
+        
+        _ = self.soundOn.asObservable().subscribeNext{
+            isOn in
+            self.btnBarSound.userInteractionEnabled = isOn
+            if isOn {
+                self.btnBarSound.setImage(UIImage(named: "img-sound"), forState: .Normal)
+            }
+            else {
+                self.btnBarSound.setImage(UIImage(named: "img-sound-mute"), forState: .Normal)
+            }
+            
+        }
     }
     
     //MARK: Animation
     func flipFlashCard() {
-        
-//        self.backFlashCard.updateLayout()
         let frameBackCard = CGRectMake(0, 0, vFlashCard.layer.frame.size.width,
-                                       self.backFlashCard.height)
+                                    self.backFlashCard.height)
         self.synthesizer.stopSpeakingAtBoundary(.Word)
         self.backFlashCard.frame = frameBackCard
         updateLayout()
@@ -129,9 +138,13 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         //set backgorund View
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         UIView .animateWithDuration(0.2) {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+            self.navigationController?.navigationBar.translucent = false
             self.vContent.backgroundColor = ColorGenarator.getColor(self.packIndex)
             self.navigationController!.navigationBar.barTintColor = ColorGenarator.getColor(self.packIndex);
             self.navigationController!.navigationBar.tintColor = .whiteColor();
+            self.navigationItem.title = self.currentPack.name
+            
         }
         
     }
@@ -159,7 +172,6 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         
         // Load BackFlashCardView
         self.backFlashCard = NSBundle.mainBundle().loadNibNamed("BackFlashCardView", owner: self, options: nil) [0] as! BackFlashCardViewModel
-        
         // Label progress
         self.vReview = UIView()
         self.vMaster = UIView()

@@ -14,7 +14,6 @@ import RealmSwift
 
 class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     @IBOutlet weak var vCollection: UIView!
-    
     @IBOutlet weak var btnSettings: UIButton!
     
     var collectionView:UICollectionView!

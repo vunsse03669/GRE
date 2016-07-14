@@ -10,10 +10,8 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
     @IBOutlet weak var vNavigationBar: UIView!
-    
     @IBOutlet weak var btnRate: UIButton!
     @IBOutlet weak var tbvButton: UITableView!
-    
     @IBOutlet weak var btnBack: UIButton!
     
     var loadingIndicator : UIActivityIndicatorView!

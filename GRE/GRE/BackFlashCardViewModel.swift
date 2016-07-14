@@ -75,7 +75,8 @@ class BackFlashCardViewModel: SpringView {
         self.lblType.sizeToFit()
         self.lblWord.sizeToFit()
         self.height = self.lblWord.frame.size.height + self.lblType.frame.size.height
-            + self.lblScript.frame.size.height + 60
+            + self.lblScript.frame.size.height + 40
+        self.frame.size.height = height
         print(self.bounds.size.height/3)
     }
 
