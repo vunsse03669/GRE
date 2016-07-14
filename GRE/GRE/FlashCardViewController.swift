@@ -236,7 +236,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
                 self.cardCollection.append(card)
             }
             else {
-                self.cardCollection.append(DB.getCardByWord(word))
+                self.cardCollection.append(DB.getCardInPack(self.currentPack, word: word))
             }
         }
         self.bindingData()
@@ -252,17 +252,17 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
             self.isFlip = false
             let card = self.cardCollection[self.currentCard]
             if card.tag == MASTER_TAG {
-                DB.updateTag(card, tag: LEARNING_TAG)
+                DB.updateTag(self.currentPack, word: card.word, tag: LEARNING_TAG)
                 self.numberOfMaster.value -= 1
                 self.numberOfLearning.value += 1
             }
             else if card.tag == REVIEW_TAG {
-                DB.updateTag(card, tag: LEARNING_TAG)
+                DB.updateTag(self.currentPack, word: card.word, tag: LEARNING_TAG)
                 self.numberOfReviewing.value -= 1
                 self.numberOfLearning.value += 1
             }
             else if card.tag == NEW_WORD_TAG {
-                DB.updateTag(card, tag: LEARNING_TAG)
+                DB.updateTag(self.currentPack, word: card.word, tag: LEARNING_TAG)
                 self.numberOfLearning.value += 1
             }
             
@@ -282,11 +282,11 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
             self.isFlip = false
             let card = self.cardCollection[self.currentCard]
             if card.tag == NEW_WORD_TAG {
-                DB.updateTag(card, tag: MASTER_TAG)
+                DB.updateTag(self.currentPack, word: card.word, tag: MASTER_TAG)
                 self.numberOfMaster.value += 1
             }
             else if card.tag == REVIEW_TAG {
-                DB.updateTag(card, tag: MASTER_TAG)
+                DB.updateTag(self.currentPack, word: card.word, tag: MASTER_TAG)
                 self.numberOfMaster.value += 1
                 self.numberOfReviewing.value -= 1
             }
@@ -294,7 +294,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
                 
             }
             else if card.tag == LEARNING_TAG {
-                DB.updateTag(card, tag: REVIEW_TAG)
+                DB.updateTag(self.currentPack, word: card.word, tag: REVIEW_TAG)
                 self.numberOfReviewing.value += 1
                 self.numberOfLearning.value  -= 1
             }

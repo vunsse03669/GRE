@@ -65,6 +65,26 @@ class DB: Object{
         return realm.objects(Card).filter(predicate).first
     }
     
+    static func getCardInPack(pack : PackCard, word : String) -> Card! {
+        var card  : Card!
+        for c in pack.cards {
+            if c.word == word {
+                card = c
+            }
+        }
+        return card
+    }
+    
+    static func updateTag(pack : PackCard,word : String, tag : String) {
+        for card in pack.cards {
+            if card.word == word {
+                try! realm.write {
+                    card.tag = tag
+                }
+            }
+        }
+        
+    }
     static func updateTag(card : Card, tag : String) {
         try! realm.write {
             card.tag = tag
