@@ -29,6 +29,8 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     @IBOutlet weak var vNavigationBar: UIView!
     @IBOutlet weak var vContent: UIView!
     
+    var btnBarSound: UIButton! = nil
+    
     var vMaster   : UIView!
     var vReview   : UIView!
     var vLearning : UIView!
@@ -40,13 +42,20 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     var cardCollection = [Card]()
     var currentPack : PackCard!
     var packIndex : Int!
-
+    
     var isStopSpeak       = Variable(false)
     var numberOfLearning  : Variable<Int> = Variable(0)
     var numberOfReviewing : Variable<Int> = Variable(0)
     var numberOfMaster    : Variable<Int> = Variable(0)
     
     var synthesizer : AVSpeechSynthesizer!
+    
+    override func viewWillAppear(animated: Bool) {
+        configColor()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        self.synthesizer.stopSpeakingAtBoundary(.Word)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,12 +124,19 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     //MARK: Config UI
-    func configLayout() {
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-        self.vFlashCard.layoutIfNeeded()
+    func configColor(){
         //set backgorund View
-        self.vNavigationBar.backgroundColor = ColorGenarator.getColor(packIndex)
-        self.vContent.backgroundColor = ColorGenarator.getColor(packIndex)
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        UIView .animateWithDuration(0.2) {
+            self.vContent.backgroundColor = ColorGenarator.getColor(self.packIndex)
+            self.navigationController!.navigationBar.barTintColor = ColorGenarator.getColor(self.packIndex);
+            self.navigationController!.navigationBar.tintColor = .whiteColor();
+        }
+        
+    }
+    func configLayout() {
+        self.vFlashCard.layoutIfNeeded()
+        
         // Load FrontFlashCardView
         self.frontFlashCard = NSBundle.mainBundle().loadNibNamed("FrontFlashCardView", owner: self, options: nil) [0] as! FrontFlashCardViewModel
         let frameFrontCard = CGRectMake(0, 0, self.vFlashCard.layer.frame.size.width,
@@ -154,7 +170,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
         
         _ = numberOfReviewing.asObservable().subscribeNext {
             review in
-           self.lblReview.text = "\(review) Reviewing"
+            self.lblReview.text = "\(review) Reviewing"
             self.caculateProgressPhase(self.vReview, color: REVIEW_TAG_COLOR,
                 origiX: self.vMaster.frame.width, numberCard: review)
             self.updateProgressPhase(self.vLearning, origiX: self.vMaster.frame.width +
@@ -168,7 +184,19 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
             self.caculateProgressPhase(self.vLearning, color: LEARNING_TAG_COLOR,
                 origiX: self.vReview.frame.width + self.vMaster.frame.width, numberCard: learning)
         }
-       
+        
+        //add bar button
+        addBarButton()
+        
+    }
+    
+    func addBarButton(){
+        
+        btnBarSound = UIButton.init(frame: CGRectMake(0, 0, 30, 30))
+        btnBarSound.setImage(UIImage.init(named: "img-sound"), forState: .Normal)
+        btnBarSound.addTarget(self, action: #selector(speakWordNonRx), forControlEvents: .TouchUpInside)
+        let btnBar = UIBarButtonItem.init(customView: btnBarSound)
+        self.navigationItem.setRightBarButtonItem(btnBar, animated: true)
     }
     
     func caculateProgressPhase(view : UIView, color : UIColor, origiX : CGFloat, numberCard : Int) {
@@ -237,7 +265,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
                 DB.updateTag(card, tag: LEARNING_TAG)
                 self.numberOfLearning.value += 1
             }
-           
+            
             self.currentCard += 1
             if self.currentCard == self.cardCollection.count {
                 self.currentCard = 0
@@ -287,7 +315,7 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
             self.btnSound.userInteractionEnabled = false
             var text = ""
             if !self.isFlip {
-                 text = self.cardCollection[self.currentCard].word
+                text = self.cardCollection[self.currentCard].word
             }
             else {
                 text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)"
@@ -298,12 +326,28 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
             self.synthesizer.speakUtterance(utterance)
         }
     }
+    func speakWordNonRx(){
+        self.btnBarSound.userInteractionEnabled = false
+        var text = ""
+        if !self.isFlip {
+            text = self.cardCollection[self.currentCard].word
+        }
+        else {
+            text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)"
+        }
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.rate = 0.4
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        self.synthesizer.speakUtterance(utterance)
+    }
     // AVSpeach delegate
     func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
         self.btnSound.userInteractionEnabled = true
+        self.btnBarSound.userInteractionEnabled = true
     }
     
     func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didCancelSpeechUtterance utterance: AVSpeechUtterance) {
         self.btnSound.userInteractionEnabled = true
+        self.btnBarSound.userInteractionEnabled = true
     }
 }

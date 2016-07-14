@@ -15,6 +15,8 @@ import RealmSwift
 class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     @IBOutlet weak var vCollection: UIView!
     
+    @IBOutlet weak var btnSettings: UIButton!
+    
     var collectionView:UICollectionView!
     var packs =  [PackCard]()
     @IBOutlet weak var clvPack: UICollectionView!
@@ -22,8 +24,12 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        UIView.animateWithDuration(0.2) {
+            self.navigationController!.navigationBar.barTintColor = .whiteColor();
+        }
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
         packs = DB.getAllPacks()
-        clvPack.reloadData()
+        // clvPack.reloadData()
     }
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         clvPack.layoutIfNeeded()
@@ -33,12 +39,29 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         dumpData()
+        addBarButton()
         clvPack.registerNib(UINib.init(nibName: "clvPackCell", bundle: nil), forCellWithReuseIdentifier: "clvPackCell")
     }
     
     func configCollectionView() {
         self.view.layoutIfNeeded()
     }
+    
+    func addBarButton(){
+        
+        let title = UILabel.init(frame: CGRectMake(0, 0, 320, 40))
+        title.textAlignment = .Left
+        title.text = "Flash Cards"
+        self.navigationItem.titleView = title
+        
+        
+        let btnSettings : UIButton = UIButton.init(frame: CGRectMake(0, 0, 30, 30))
+        btnSettings.setImage(UIImage.init(named: "img-settings"), forState: .Normal)
+        btnSettings.addTarget(self, action: #selector(btnSettingsDidTap), forControlEvents: .TouchUpInside)
+        let btnBarSettings : UIBarButtonItem = UIBarButtonItem.init(customView: btnSettings)
+        self.navigationItem.setRightBarButtonItem(btnBarSettings, animated: true)
+    }
+    
     func dumpData() {
         if let file = NSBundle(forClass:AppDelegate.self).pathForResource("text", ofType: "txt") {
             let data = NSData(contentsOfFile: file)!
@@ -112,12 +135,15 @@ class ListPackViewController: UIViewController,UICollectionViewDelegate,UICollec
         let flashCard : FlashCardViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("FlashCardViewController") as? FlashCardViewController)!
         flashCard.currentPack = packs[indexPath.row]
         flashCard.packIndex = indexPath.row
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromRight
-        view.window!.layer.addAnimation(transition, forKey: kCATransition)
-        presentViewController(flashCard, animated: false, completion: nil)
+        self.navigationController?.pushViewController(flashCard, animated: true)
+    }
+    
+    //MARK: Button Settings
+    
+    @IBAction func btnSettingsDidTap(sender: AnyObject) {
+        
+        let settingsVC : SettingsViewController! = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsViewController") as? SettingsViewController
+        self.navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     

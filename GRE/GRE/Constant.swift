@@ -19,3 +19,8 @@ let LEARNING_TAG_COLOR    = UIColor(netHex: 0xe74c3c)
 let REVIEW_TAG_COLOR      = UIColor(netHex: 0xfbc02d)
 let NEW_WORD_TAG_COLOR    = UIColor(netHex: 0x607d8b)
 
+//cell type
+let CELL_TYPE_SWITCH_SOUND : Int = 0
+let CELL_TYPE_SWITCH_RANDOM : Int = 1
+
+

@@ -22,5 +22,4 @@ class Card: Object {
         DB.createCard(newCard)
         return newCard
     }
-    
 }

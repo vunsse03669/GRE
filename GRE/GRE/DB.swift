@@ -51,6 +51,15 @@ class DB: Object{
         }
     }
     
+    static func getAllCards()->[Card]!{
+        let cards = realm.objects(Card)
+        var returnCards = [Card]()
+        for card:Card in cards {
+            returnCards.append(card)
+        }
+        return returnCards
+    }
+    
     static func getCardByWord(word : String) -> Card! {
         let predicate = NSPredicate(format: "word = %@", word)
         return realm.objects(Card).filter(predicate).first
@@ -60,6 +69,49 @@ class DB: Object{
         try! realm.write {
             card.tag = tag
         }
+    }
+    
+    //MARK: Setting
+    static func createSetting(setting : Setting){
+        try! realm.write{
+            realm.add(setting)
+        }
+    }
+    static func updateSetting(turnOffSound: Int, randomCard: Int){
+        let setting = realm.objects(Setting).first
+        if(setting != nil){
+            try! realm.write {
+                if(turnOffSound==0 || turnOffSound == 1){
+                    setting?.turnOffSound = turnOffSound
+                }
+                if(randomCard == 0 || randomCard == 1){
+                    setting?.isRandom = randomCard
+                }
+            }
+        }else{
+            Setting.create()
+            DB.updateSetting(turnOffSound, randomCard: randomCard)
+        }
+    }
+    
+    static func getSoundOn()->Bool{
+        let setting = realm.objects(Setting).first
+        if(setting != nil){
+            if(setting?.turnOffSound == 1){
+                return false
+            }
+        }
+        return true
+    }
+    
+    static func getIsRandom()->Bool{
+        let setting = realm.objects(Setting).first
+        if(setting != nil){
+            if(setting?.isRandom == 1){
+                return true
+            }
+        }
+        return false
     }
     
 }
