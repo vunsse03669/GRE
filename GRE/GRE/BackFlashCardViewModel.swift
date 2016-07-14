@@ -61,11 +61,22 @@ class BackFlashCardViewModel: SpringView {
             self.vTag.backgroundColor = MASTER_TAG_COLOR
         }
 
+       updateLayout()
+        
+    }
+    func updateLayout(){
+        self.layoutIfNeeded()
+        self.lblWord.layoutIfNeeded()
+        self.lblTag.layoutIfNeeded()
+        self.lblType.layoutIfNeeded()
+        self.lblScript.layoutIfNeeded()
+    
         self.lblScript.sizeToFit()
         self.lblType.sizeToFit()
+        self.lblWord.sizeToFit()
         self.height = self.lblWord.frame.size.height + self.lblType.frame.size.height
-            + self.lblScript.frame.size.height + 80
-        
+            + self.lblScript.frame.size.height + 60
+        print(self.bounds.size.height/3)
     }
 
 }
