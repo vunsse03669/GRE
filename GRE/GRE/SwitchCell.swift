@@ -22,6 +22,7 @@ class SwitchCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.btnSwitch.onTintColor = .redColor()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FXa-NM-PtO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FXa-NM-PtO">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vkj-OB-a0j">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="592"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RyW-SI-s6C">
                                             <size key="itemSize" width="50" height="50"/>
@@ -38,13 +38,20 @@
                                         </connections>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="Vkj-OB-a0j" firstAttribute="height" secondItem="0me-tI-8QW" secondAttribute="height" id="7NZ-24-bUW"/>
+                                    <constraint firstItem="Vkj-OB-a0j" firstAttribute="height" secondItem="0me-tI-8QW" secondAttribute="height" constant="-8" id="7NZ-24-bUW"/>
                                     <constraint firstItem="Vkj-OB-a0j" firstAttribute="width" secondItem="0me-tI-8QW" secondAttribute="width" id="O8F-ro-hMf"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vkj-OB-a0j" secondAttribute="bottom" id="QMG-3M-zN6"/>
                                     <constraint firstItem="Vkj-OB-a0j" firstAttribute="centerY" secondItem="0me-tI-8QW" secondAttribute="centerY" id="gIc-zV-I9r"/>
                                     <constraint firstItem="Vkj-OB-a0j" firstAttribute="centerX" secondItem="0me-tI-8QW" secondAttribute="centerX" id="mEG-QO-fF0"/>
+                                    <constraint firstItem="Vkj-OB-a0j" firstAttribute="top" secondItem="0me-tI-8QW" secondAttribute="top" id="pzY-d2-IsG"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="QMG-3M-zN6"/>
+                                        <exclude reference="gIc-zV-I9r"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -258,32 +265,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16T-Kn-0NS">
-                                <rect key="frame" x="0.0" y="472" width="600" height="128"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SVs-Nk-59n">
-                                        <rect key="frame" x="200" y="32" width="200" height="64"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdl-r2-le8">
-                                        <rect key="frame" x="200" y="32" width="200" height="64"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                </subviews>
+                                <rect key="frame" x="0.0" y="600" width="600" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Cdl-r2-le8" firstAttribute="centerY" secondItem="SVs-Nk-59n" secondAttribute="centerY" id="6HB-kR-sXo"/>
-                                    <constraint firstItem="Cdl-r2-le8" firstAttribute="height" secondItem="SVs-Nk-59n" secondAttribute="height" id="JJG-XN-CCq"/>
-                                    <constraint firstItem="SVs-Nk-59n" firstAttribute="height" secondItem="16T-Kn-0NS" secondAttribute="height" multiplier="1:2" id="P61-7C-a4l"/>
-                                    <constraint firstItem="Cdl-r2-le8" firstAttribute="centerX" secondItem="SVs-Nk-59n" secondAttribute="centerX" id="RA1-3n-C63"/>
-                                    <constraint firstItem="Cdl-r2-le8" firstAttribute="width" secondItem="SVs-Nk-59n" secondAttribute="width" id="Ug8-oY-ry3"/>
-                                    <constraint firstItem="SVs-Nk-59n" firstAttribute="width" secondItem="16T-Kn-0NS" secondAttribute="width" multiplier="1:3" id="itB-Ug-JIR"/>
-                                    <constraint firstItem="SVs-Nk-59n" firstAttribute="centerX" secondItem="16T-Kn-0NS" secondAttribute="centerX" id="ncR-MK-g3R"/>
-                                    <constraint firstItem="SVs-Nk-59n" firstAttribute="centerY" secondItem="16T-Kn-0NS" secondAttribute="centerY" id="ons-hv-YOP"/>
-                                    <constraint firstAttribute="height" constant="128" id="tUO-MC-b24"/>
+                                    <constraint firstAttribute="height" id="tUO-MC-b24"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dfp-TC-7XM">
-                                <rect key="frame" x="0.0" y="20" width="600" height="452"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="HQJ-eU-VDB" id="cYy-Mp-5J8"/>
@@ -306,7 +295,6 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="BJg-NM-mGW"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnRate" destination="Cdl-r2-le8" id="5C4-AH-F6c"/>
                         <outlet property="tbvButton" destination="dfp-TC-7XM" id="LsO-CW-zf6"/>
                     </connections>
                 </viewController>
