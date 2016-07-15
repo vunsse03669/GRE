@@ -10,6 +10,7 @@
 		93F089FCCE789E294CA539F4 /* Pods_GRE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DA2F1E6059B73F08C67B814 /* Pods_GRE.framework */; };
 		9909D5861D33522900B2D325 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9909D5851D33522900B2D325 /* UIColorExtension.swift */; };
 		991BD00E1D322FFC00A41B0A /* text.txt in Resources */ = {isa = PBXBuildFile; fileRef = 991BD00D1D322FFC00A41B0A /* text.txt */; };
+		99AC14B11D38E06E00E0C31B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AC14B01D38E06E00E0C31B /* StringExtension.swift */; };
 		99C35AD01D313147007E549E /* FlashCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C35ACF1D313147007E549E /* FlashCardViewController.swift */; };
 		99C35AD41D313385007E549E /* FrontFlashCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C35AD31D313385007E549E /* FrontFlashCardViewModel.swift */; };
 		99C35AD61D3133A6007E549E /* FrontFlashCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99C35AD51D3133A6007E549E /* FrontFlashCardView.xib */; };
@@ -41,6 +42,7 @@
 		8DA2F1E6059B73F08C67B814 /* Pods_GRE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GRE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9909D5851D33522900B2D325 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		991BD00D1D322FFC00A41B0A /* text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = text.txt; sourceTree = "<group>"; };
+		99AC14B01D38E06E00E0C31B /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		99C35ACF1D313147007E549E /* FlashCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashCardViewController.swift; sourceTree = "<group>"; };
 		99C35AD31D313385007E549E /* FrontFlashCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontFlashCardViewModel.swift; sourceTree = "<group>"; };
 		99C35AD51D3133A6007E549E /* FrontFlashCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrontFlashCardView.xib; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				9909D5851D33522900B2D325 /* UIColorExtension.swift */,
+				99AC14B01D38E06E00E0C31B /* StringExtension.swift */,
 			);
 			name = Apple;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				E8B4082D1D2ECA9F00970B8C /* PackCard.swift in Sources */,
 				E80356D11D33B8F00043AB56 /* clvPackCell.swift in Sources */,
 				E8B4082F1D2ECD4400970B8C /* DB.swift in Sources */,
+				99AC14B11D38E06E00E0C31B /* StringExtension.swift in Sources */,
 				E818C26A1D36675100EA28E9 /* ButtonCell.swift in Sources */,
 				99C35AD41D313385007E549E /* FrontFlashCardViewModel.swift in Sources */,
 				E818C26D1D36952000EA28E9 /* Setting.swift in Sources */,

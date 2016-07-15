@@ -45,8 +45,8 @@ class BackFlashCardViewModel: SpringView {
     func layout() {
         self.lblWord.text   = self.card.word
         self.lblTag.text    = self.card.tag.uppercaseString
-        self.lblType.text   = self.card.type
-        self.lblScript.text = self.card.script
+        self.toHTML(self.lblType, text: self.card.type)
+        self.toHTML(self.lblScript, text: self.card.script)
         
         if card.tag == NEW_WORD_TAG {
             self.vTag.backgroundColor = NEW_WORD_TAG_COLOR
@@ -60,10 +60,22 @@ class BackFlashCardViewModel: SpringView {
         else if card.tag == MASTER_TAG {
             self.vTag.backgroundColor = MASTER_TAG_COLOR
         }
-
        updateLayout()
-        
     }
+    
+    func toHTML(lblText: UILabel, text : String) {
+        if let htmlData = text.dataUsingEncoding(NSUnicodeStringEncoding) {
+            do {
+                lblText.attributedText = try NSAttributedString(data: htmlData,
+                                                                     options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                                                                     documentAttributes: nil)
+            } catch let e as NSError {
+                print("Couldn't translate \(text): \(e.localizedDescription) ")
+            }
+        }
+    }
+    
+    
     func updateLayout(){
         self.layoutIfNeeded()
         self.lblWord.layoutIfNeeded()

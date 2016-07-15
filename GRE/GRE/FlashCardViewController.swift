@@ -349,7 +349,8 @@ class FlashCardViewController: UIViewController, AVSpeechSynthesizerDelegate {
             text = self.cardCollection[self.currentCard].word
         }
         else {
-            text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)"
+            let tags = ["strong","br"]
+            text = "\(self.cardCollection[self.currentCard].type) \(self.cardCollection[self.currentCard].script)".deleteHTMLTags(tags)
         }
         let utterance = AVSpeechUtterance(string: text)
         utterance.rate = 0.4
